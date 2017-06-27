@@ -32,5 +32,13 @@ public class TestVisitorDAOImpl {
 		assertEquals(target.addVisitorToDb(source, visitor), result);
 		
 	}
+	
+	@Test
+	public void testSearchVisitorReturnsCorrectResult() {
+		visitor.setFirstName("Mike");
+		visitor.setLastName("Myers");
+		target.addVisitorToDb(source, visitor);
+		assertEquals(target.searchForVisitor(source, visitor.getLastName()), visitor);
+	}
 
 }
