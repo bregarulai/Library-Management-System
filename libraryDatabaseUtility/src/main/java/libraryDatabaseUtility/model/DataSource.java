@@ -38,6 +38,14 @@ public class DataSource {
 		catch(IOException e) {
 			System.out.println(e.getMessage());
 		}
+		finally {
+			try {
+				input.close();
+			} catch (IOException e) {
+				System.out.println(e.getMessage());
+				
+			}
+		}
 	}
 	
 	
