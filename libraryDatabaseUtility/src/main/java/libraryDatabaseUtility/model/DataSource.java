@@ -4,13 +4,16 @@
 
 package libraryDatabaseUtility.model;
 
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.Properties;
 
 public class DataSource {
 	private static DataSource instance = null;
-	private Connection conn = null;
+	private Connection connection = null;
 	private String url;
 	private String dbUser;
 	private String dbPassword;
@@ -20,7 +23,21 @@ public class DataSource {
 	// Initialization block to load the configuration file
 	// and read the library and databse user's credentials
 	{
+		Properties properties = new Properties();
+		FileInputStream input = null;
 		
+		try {
+			input = new FileInputStream("resources/config.properties");
+			properties.load(input);
+			this.url = properties.getProperty("url");
+			this.dbUser = properties.getProperty("user");
+			this.dbPassword = properties.getProperty("password");
+			this.libraryUser = properties.getProperty("libraryUser");
+			this.libraryPassword = properties.getProperty("libraryPassword");
+		}
+		catch(IOException e) {
+			System.out.println(e.getMessage());
+		}
 	}
 	
 	
@@ -39,14 +56,35 @@ public class DataSource {
 	 * @return the instance
 	 */
 	public static DataSource getInstance() {
+		if(instance == null) {					// to make class lazily loaded
+			synchronized(DataSource.class) {	// to make method thread safe
+				if(instance == null) {
+					instance = new DataSource();
+				}
+			}
+		}
+		
 		return instance;
 	}
 
 	/**
 	 * @return the connection
 	 */
-	public Connection getConn() {
-		return conn;
+	public Connection getConnection() {
+		if(connection == null) {
+			synchronized(DataSource.class) {		// to make method thread safe
+				if(connection == null) {
+					try {
+						connection = DriverManager.getConnection(url, dbUser, dbPassword);
+					}
+					catch(SQLException e) {
+						System.out.println(e.getMessage());
+					}
+				}
+			}
+		}
+		
+		return connection;
 	}
 
 	/**
