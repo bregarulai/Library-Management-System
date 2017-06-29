@@ -5,7 +5,9 @@ package libraryDatabaseUtility.repository;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import libraryDatabaseUtility.model.Book;
@@ -18,6 +20,7 @@ import libraryDatabaseUtility.model.DataSource;
 public class BookDAOImpl implements BookDAO {
 	
 	private static final String INSERT_BOOK_SQL = "insert into books (title, author) values(?,?)";
+	private static final String SELECT_ALL_BOOKS_SQL = "select * from books";
 	
 	/* (non-Javadoc)
 	 * @see libraryDatabaseUtility.repository.BookDAO#addBookToDb(libraryDatabaseUtility.model.DataSource, libraryDatabaseUtility.model.Book)
@@ -39,9 +42,27 @@ public class BookDAOImpl implements BookDAO {
 	/* (non-Javadoc)
 	 * @see libraryDatabaseUtility.repository.BookDAO#getAllBooks(libraryDatabaseUtility.model.DataSource)
 	 */
-	public List<Book> getAllBooks(DataSource source) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Book> getAllBooks(DataSource source) throws SQLException {
+		ResultSet resultSet = null;
+		PreparedStatement statement = null;
+		Connection connection = source.getConnection();
+		List<Book> books = new ArrayList<Book>();
+		
+		statement = connection.prepareStatement(SELECT_ALL_BOOKS_SQL,
+				ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+		resultSet = statement.executeQuery();
+		
+		// To map resultSet to book object
+		while(resultSet.next()) {
+			Book book = new Book();
+			book.setBookId(resultSet.getLong("bookId"));
+			book.setBookTitle(resultSet.getString("title"));
+			book.setBookAuthor(resultSet.getString("author"));
+			book.setAvailable(resultSet.getBoolean("available"));
+			books.add(book);
+		}
+				
+		return books;
 	}
 
 	/* (non-Javadoc)
