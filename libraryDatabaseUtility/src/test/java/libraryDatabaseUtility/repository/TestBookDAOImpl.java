@@ -5,6 +5,7 @@ package libraryDatabaseUtility.repository;
 
 import static org.junit.Assert.*;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,27 +36,27 @@ public class TestBookDAOImpl {
 	}
 
 	@Test
-	public void testBookAddedToDatabase() {
+	public void testBookAddedToDatabase() throws SQLException {
 		int result = 1;
 		assertEquals(target.addBookToDb(source, book), result);
 		
 	}
 	
 	@Test
-	public void testListOfBooksGetsReturned() {
+	public void testListOfBooksGetsReturned() throws SQLException {
 		List<Book> books = new ArrayList<Book>();
 		books = target.getAllBooks(source);
 		assertNotNull(books);
 	}
 	
 	@Test
-	public void testRecordGetsDeletedFromDatabase() {
+	public void testRecordGetsDeletedFromDatabase() throws SQLException {
 		int result = 1;
 		assertEquals(target.deleteRecord(source, BOOK_ID), result);
 	}
 
 	@Test
-	public void testSearchBookReturnsCorrectResult() {
+	public void testSearchBookReturnsCorrectResult() throws SQLException {
 		Book book1 = new Book(BOOK_ID, "To Kill a Mockingbird", "Harper Lee");
 		target.addBookToDb(source, book1);
 		assertEquals(target.searchForBooks(source, book1.getBookTitle()), book1);
