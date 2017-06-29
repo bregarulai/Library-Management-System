@@ -22,6 +22,7 @@ public class BookDAOImpl implements BookDAO {
 	private static final String INSERT_BOOK_SQL = "insert into books (title, author) values(?,?)";
 	private static final String SELECT_ALL_BOOKS_SQL = "select * from books";
 	private static final String DELETE_RECORD_SQL = "delete from books where book_id = ?";
+	private static final String SEARCH_BOOK_SQL = "select * from books where author = ?";
 	
 	/* (non-Javadoc)
 	 * @see libraryDatabaseUtility.repository.BookDAO#addBookToDb(libraryDatabaseUtility.model.DataSource, libraryDatabaseUtility.model.Book)
@@ -89,9 +90,30 @@ public class BookDAOImpl implements BookDAO {
 	/* (non-Javadoc)
 	 * @see libraryDatabaseUtility.repository.BookDAO#searchForBooks(libraryDatabaseUtility.model.DataSource, java.lang.String)
 	 */
-	public List<Book> searchForBooks(DataSource source, String title) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Book> searchForBooks(DataSource source, String title) throws SQLException {
+		List<Book> books = new ArrayList<Book>();
+		ResultSet resultSet = null;
+		PreparedStatement statement = null;
+		Connection connection = source.getConnection();
+		
+		statement = connection.prepareStatement(SEARCH_BOOK_SQL);
+		statement.setString(1, title);
+		resultSet = statement.executeQuery();
+		
+		// To map resultSet to book object
+		while(resultSet.next()) {
+			Book book = new Book();
+			book.setBookId(resultSet.getLong("book_id"));
+			book.setBookTitle(resultSet.getString("title"));
+			book.setBookAuthor(resultSet.getString("author"));
+			book.setAvailable(resultSet.getBoolean("available"));
+			books.add(book);
+		}
+		
+		resultSet.close();
+		statement.close();
+		connection.close();
+		return books;
 	}
 
 	/* (non-Javadoc)
