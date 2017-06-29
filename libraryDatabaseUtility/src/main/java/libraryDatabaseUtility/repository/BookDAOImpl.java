@@ -21,6 +21,7 @@ public class BookDAOImpl implements BookDAO {
 	
 	private static final String INSERT_BOOK_SQL = "insert into books (title, author) values(?,?)";
 	private static final String SELECT_ALL_BOOKS_SQL = "select * from books";
+	private static final String DELETE_RECORD_SQL = "delete from books where book_id = ?";
 	
 	/* (non-Javadoc)
 	 * @see libraryDatabaseUtility.repository.BookDAO#addBookToDb(libraryDatabaseUtility.model.DataSource, libraryDatabaseUtility.model.Book)
@@ -61,16 +62,28 @@ public class BookDAOImpl implements BookDAO {
 			book.setAvailable(resultSet.getBoolean("available"));
 			books.add(book);
 		}
-				
+		
+		resultSet.close();
+		statement.close();
+		connection.close();
 		return books;
 	}
 
 	/* (non-Javadoc)
 	 * @see libraryDatabaseUtility.repository.BookDAO#deleteRecord(libraryDatabaseUtility.model.DataSource, long)
 	 */
-	public int deleteRecord(DataSource source, long bookId) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int deleteRecord(DataSource source, long bookId) throws SQLException {
+		int result = 0;
+		Connection connection = source.getConnection();
+		PreparedStatement statement = null;
+		
+		statement = connection.prepareStatement(DELETE_RECORD_SQL);
+		statement.setLong(1, bookId);
+		result = statement.executeUpdate();
+		
+		statement.close();
+		connection.close();
+		return result;
 	}
 
 	/* (non-Javadoc)
