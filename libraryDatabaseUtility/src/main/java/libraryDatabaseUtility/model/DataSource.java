@@ -4,8 +4,9 @@
 
 package libraryDatabaseUtility.model;
 
-import java.io.FileInputStream;
+
 import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -24,10 +25,10 @@ public class DataSource {
 	// and read the library and databse user's credentials
 	{
 		Properties properties = new Properties();
-		FileInputStream input = null;
+		
 		
 		try {
-			input = new FileInputStream("resources/config.properties");
+			InputStream input = getClass().getResourceAsStream("/config.properties");
 			properties.load(input);
 			this.url = properties.getProperty("url");
 			this.dbUser = properties.getProperty("user");
@@ -38,14 +39,7 @@ public class DataSource {
 		catch(IOException e) {
 			System.out.println(e.getMessage());
 		}
-		finally {
-			try {
-				input.close();
-			} catch (IOException e) {
-				System.out.println(e.getMessage());
-				
-			}
-		}
+		
 	}
 	
 	
