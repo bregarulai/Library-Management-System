@@ -3,6 +3,7 @@
  */
 package libraryDatabaseUtility.repository;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import libraryDatabaseUtility.model.Book;
@@ -14,7 +15,7 @@ import libraryDatabaseUtility.model.DataSource;
  */
 public interface BookDAO {
 	
-	public int addBookToDb(DataSource source, Book book);
+	public int addBookToDb(DataSource source, Book book) throws SQLException;
 	
 	public List<Book> getAllBooks(DataSource source);
 	
