@@ -21,7 +21,7 @@ public interface BookDAO {
 	
 	public int deleteRecord(DataSource source, long bookId) throws SQLException;
 	
-	public List<Book> searchForBooks(DataSource source, String title);
+	public List<Book> searchForBooks(DataSource source, String title) throws SQLException;
 	
 	public List<Book> getCheckoutBooks(DataSource source);
 	
