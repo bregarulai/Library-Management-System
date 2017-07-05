@@ -24,6 +24,11 @@ public class BookDAOImpl implements BookDAO {
 	private static final String DELETE_RECORD_SQL = "delete from books where ID = ?";
 	private static final String SEARCH_BOOK_SQL = "select * from books where author = ?";
 	
+	// no arg constructor
+	public BookDAOImpl() {
+		
+	}
+	
 	/* (non-Javadoc)
 	 * @see libraryDatabaseUtility.repository.BookDAO#addBookToDb(libraryDatabaseUtility.model.DataSource, libraryDatabaseUtility.model.Book)
 	 */
