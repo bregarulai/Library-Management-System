@@ -38,6 +38,8 @@ public class BookDAOImpl implements BookDAO {
 		
 		result = statement.executeUpdate();
 		
+		statement.close();
+		connection.close();
 		return result;
 	}
 
