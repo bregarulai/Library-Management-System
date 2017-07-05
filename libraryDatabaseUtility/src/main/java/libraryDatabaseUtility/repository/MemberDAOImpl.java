@@ -22,6 +22,7 @@ public class MemberDAOImpl implements MemberDAO {
 	private static final String INSERT_MEMBER_SQL = "insert into members (firstName, lastName) values (?, ?)";
 	private static final String DELETE_RECORD_SQL = "delete from members where ID = ?";
 	private static final String SELECT_ALL_MEMBERS_SQL = "select * from members";
+	private static final String SEARCH_MEMBER_SQL = "select * from members where lastName = ?";
 	
 	
 	/* (non-Javadoc)
@@ -95,9 +96,31 @@ public class MemberDAOImpl implements MemberDAO {
 	/* (non-Javadoc)
 	 * @see libraryDatabaseUtility.repository.MemberDAO#searchForMembers(libraryDatabaseUtility.model.DataSource, java.lang.String)
 	 */
-	public List<Member> searchForMembers(DataSource source, String lastName) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Member> searchForMembers(DataSource source, String lastName) throws SQLException {
+		ResultSet resultSet = null;
+		PreparedStatement statement = null;
+		Connection connection = source.getConnection();
+		List<Member> members = new ArrayList<Member>();
+		
+		statement = connection.prepareStatement(SEARCH_MEMBER_SQL, 
+				ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+		
+		statement.setString(1, lastName);
+		resultSet = statement.executeQuery();
+		
+		// to map resultset to Member object
+		while(resultSet.next()) {
+			Member member = new Member();
+			member.setMemberId(resultSet.getLong("ID"));
+			member.setFirstName(resultSet.getString("firstName"));
+			member.setLastName(resultSet.getString("lastName"));
+			members.add(member);
+		}
+		
+		resultSet.close();
+		statement.close();
+		connection.close();
+		return members;
 	}
 
 	/* (non-Javadoc)
