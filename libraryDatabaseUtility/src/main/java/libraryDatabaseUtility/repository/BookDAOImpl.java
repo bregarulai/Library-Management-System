@@ -21,7 +21,7 @@ public class BookDAOImpl implements BookDAO {
 	
 	private static final String INSERT_BOOK_SQL = "insert into books (title, author) values(?,?)";
 	private static final String SELECT_ALL_BOOKS_SQL = "select * from books";
-	private static final String DELETE_RECORD_SQL = "delete from books where book_id = ?";
+	private static final String DELETE_RECORD_SQL = "delete from books where ID = ?";
 	private static final String SEARCH_BOOK_SQL = "select * from books where author = ?";
 	
 	/* (non-Javadoc)
