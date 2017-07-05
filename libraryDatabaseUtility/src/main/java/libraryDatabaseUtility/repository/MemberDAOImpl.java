@@ -24,6 +24,10 @@ public class MemberDAOImpl implements MemberDAO {
 	private static final String SELECT_ALL_MEMBERS_SQL = "select * from members";
 	private static final String SEARCH_MEMBER_SQL = "select * from members where lastName = ?";
 	
+	public MemberDAOImpl() {
+		
+	}
+	
 	
 	/* (non-Javadoc)
 	 * @see libraryDatabaseUtility.repository.MemberDAO#addCustomerToDb(libraryDatabaseUtility.model.DataSource, libraryDatabaseUtility.model.Member)
