@@ -14,7 +14,7 @@ public class Member {
 	private String firstName;
 	private String lastName;
 	private Set<Book> books = null;
-	private long fees;
+	private double fees;
 	
 	// No args constructor
 	public Member () {
@@ -90,7 +90,7 @@ public class Member {
 	/**
 	 * @return the fees
 	 */
-	public long getFees() {
+	public double getFees() {
 		return fees;
 	}
 
