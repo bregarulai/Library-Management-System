@@ -3,6 +3,9 @@
  */
 package libraryDatabaseUtility.repository;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.List;
 
 import libraryDatabaseUtility.model.DataSource;
@@ -13,13 +16,28 @@ import libraryDatabaseUtility.model.Member;
  *
  */
 public class MemberDAOImpl implements MemberDAO {
-
+	
+	private static final String INSERT_MEMBER_SQL = "insert into members (firstName, lastName) values (?, ?)";
+	
+	
 	/* (non-Javadoc)
 	 * @see libraryDatabaseUtility.repository.MemberDAO#addCustomerToDb(libraryDatabaseUtility.model.DataSource, libraryDatabaseUtility.model.Member)
 	 */
-	public int addCustomerToDb(DataSource source, Member member) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int addCustomerToDb(DataSource source, Member member) throws SQLException {
+		int result = 0;
+		PreparedStatement statement = null;
+		Connection connection = source.getConnection();
+		
+		statement = connection.prepareStatement(INSERT_MEMBER_SQL);
+		
+		statement.setString(1, member.getFirstName());
+		statement.setString(2, member.getLastName());
+		
+		result = statement.executeUpdate();
+		
+		statement.close();
+		connection.close();
+		return result;
 	}
 
 	/* (non-Javadoc)
