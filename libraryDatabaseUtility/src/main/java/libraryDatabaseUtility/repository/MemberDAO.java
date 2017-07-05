@@ -17,7 +17,7 @@ public interface MemberDAO {
 
 	public int addCustomerToDb(DataSource source, Member member) throws SQLException;
 	
-	public int deleteRecord(DataSource source, long memberId);
+	public int deleteRecord(DataSource source, long memberId) throws SQLException;
 	
 	public List<Member> getAllMembers(DataSource source);
 	
