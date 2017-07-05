@@ -19,7 +19,7 @@ public interface MemberDAO {
 	
 	public int deleteRecord(DataSource source, long memberId) throws SQLException;
 	
-	public List<Member> getAllMembers(DataSource source);
+	public List<Member> getAllMembers(DataSource source) throws SQLException;
 	
 	public List<Member> searchForMembers(DataSource source, String lastName);
 	
