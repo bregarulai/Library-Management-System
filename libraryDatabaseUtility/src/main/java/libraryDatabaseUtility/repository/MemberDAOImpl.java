@@ -18,6 +18,7 @@ import libraryDatabaseUtility.model.Member;
 public class MemberDAOImpl implements MemberDAO {
 	
 	private static final String INSERT_MEMBER_SQL = "insert into members (firstName, lastName) values (?, ?)";
+	private static final String DELETE_RECORD_SQL = "delete from members where ID = ?";
 	
 	
 	/* (non-Javadoc)
@@ -43,9 +44,19 @@ public class MemberDAOImpl implements MemberDAO {
 	/* (non-Javadoc)
 	 * @see libraryDatabaseUtility.repository.MemberDAO#deleteRecord(libraryDatabaseUtility.model.DataSource, long)
 	 */
-	public int deleteRecord(DataSource source, long memberId) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int deleteRecord(DataSource source, long memberId) throws SQLException {
+		int result = 0;
+		PreparedStatement statement = null;
+		Connection connection = source.getConnection();
+		
+		statement = connection.prepareStatement(DELETE_RECORD_SQL);
+		statement.setLong(1, memberId);
+		
+		result = statement.executeUpdate();
+		
+		statement.close();
+		connection.close();
+		return result;
 	}
 
 	/* (non-Javadoc)
