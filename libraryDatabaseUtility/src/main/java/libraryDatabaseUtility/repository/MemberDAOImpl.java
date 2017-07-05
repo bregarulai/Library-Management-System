@@ -5,7 +5,9 @@ package libraryDatabaseUtility.repository;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import libraryDatabaseUtility.model.DataSource;
@@ -19,6 +21,7 @@ public class MemberDAOImpl implements MemberDAO {
 	
 	private static final String INSERT_MEMBER_SQL = "insert into members (firstName, lastName) values (?, ?)";
 	private static final String DELETE_RECORD_SQL = "delete from members where ID = ?";
+	private static final String SELECT_ALL_MEMBERS_SQL = "select * from members";
 	
 	
 	/* (non-Javadoc)
@@ -62,9 +65,31 @@ public class MemberDAOImpl implements MemberDAO {
 	/* (non-Javadoc)
 	 * @see libraryDatabaseUtility.repository.MemberDAO#getAllMembers(libraryDatabaseUtility.model.DataSource)
 	 */
-	public List<Member> getAllMembers(DataSource source) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Member> getAllMembers(DataSource source) throws SQLException {
+		ResultSet resultSet = null;
+		PreparedStatement statement = null;
+		Connection connection = source.getConnection();
+		List<Member> members = new ArrayList<Member>();
+		
+		statement = connection.prepareStatement(SELECT_ALL_MEMBERS_SQL, 
+				ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+		
+		resultSet = statement.executeQuery();
+		
+		// to map result set to member object
+		while(resultSet.next()) {
+			Member member = new Member();
+			member.setMemberId(resultSet.getLong("ID"));
+			member.setFirstName(resultSet.getString("firstName"));
+			member.setLastName(resultSet.getString("lastName"));
+			
+			members.add(member);
+		}
+		
+		resultSet.close();
+		statement.close();
+		connection.close();
+		return members;
 	}
 
 	/* (non-Javadoc)
