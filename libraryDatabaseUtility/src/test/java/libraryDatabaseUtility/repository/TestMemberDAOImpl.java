@@ -5,6 +5,7 @@ package libraryDatabaseUtility.repository;
 
 import static org.junit.Assert.*;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,27 +40,27 @@ public class TestMemberDAOImpl {
 	}
 
 	@Test
-	public void testBookAddedToDatabase() {
+	public void testBookAddedToDatabase() throws SQLException {
 		int result = 1;
 		assertEquals(target.addCustomerToDb(source, member), result);
 		
 	}
 	
 	@Test
-	public void testListOfBooksGetsReturned() {
+	public void testListOfBooksGetsReturned() throws SQLException {
 		List<Member> members = new ArrayList<Member>();
 		members = target.getAllMembers(source);
 		assertNotNull(members);
 	}
 	
 	@Test
-	public void testRecordGetsDeletedFromDatabase() {
+	public void testRecordGetsDeletedFromDatabase() throws SQLException {
 		int result = 1;
 		assertEquals(target.deleteRecord(source, MEMBER_ID), result);
 	}
 
 	@Test
-	public void testSearchBookReturnsCorrectResult() {
+	public void testSearchBookReturnsCorrectResult() throws SQLException {
 		Member member1 = new Member(MEMBER_ID, "Mike", "Myers");
 		target.addCustomerToDb(source, member1);
 		assertEquals(target.searchForMembers(source, member1.getLastName()), member1);
