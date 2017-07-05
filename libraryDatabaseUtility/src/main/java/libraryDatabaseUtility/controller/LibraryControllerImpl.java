@@ -3,17 +3,45 @@
  */
 package libraryDatabaseUtility.controller;
 
+import java.sql.SQLException;
+
+import libraryDatabaseUtility.model.Book;
+import libraryDatabaseUtility.model.DataSource;
+import libraryDatabaseUtility.repository.BookDAOImpl;
+import libraryDatabaseUtility.repository.MemberDAO;
+import libraryDatabaseUtility.repository.MemberDAOImpl;
+import libraryDatabaseUtility.view.LibraryViewImpl;
+
 /**
  * @author Flavio Luis June 2017
  *
  */
 public class LibraryControllerImpl implements LibraryController {
+	
+	DataSource source;
+	LibraryViewImpl view;
+	MemberDAOImpl memberDao;
+	BookDAOImpl bookDao;
 
 	/* (non-Javadoc)
 	 * @see libraryDatabaseUtility.controller.LibraryController#addBook(java.lang.String, java.lang.String)
 	 */
 	public void addBook(String title, String author) {
-		// TODO Auto-generated method stub
+		source = DataSource.getInstance();
+		view = new LibraryViewImpl();
+		Book book = new Book();
+		book.setBookTitle(title);
+		book.setBookAuthor(author);
+		int result = 0;
+		try {
+			result = bookDao.addBookToDb(source, book);
+			view.displayAddedRecordMessage(result);
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 
 	}
 
