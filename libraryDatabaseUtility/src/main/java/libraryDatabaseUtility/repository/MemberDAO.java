@@ -3,6 +3,7 @@
  */
 package libraryDatabaseUtility.repository;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import libraryDatabaseUtility.model.DataSource;
@@ -14,7 +15,7 @@ import libraryDatabaseUtility.model.Member;
  */
 public interface MemberDAO {
 
-	public int addCustomerToDb(DataSource source, Member member);
+	public int addCustomerToDb(DataSource source, Member member) throws SQLException;
 	
 	public int deleteRecord(DataSource source, long memberId);
 	
