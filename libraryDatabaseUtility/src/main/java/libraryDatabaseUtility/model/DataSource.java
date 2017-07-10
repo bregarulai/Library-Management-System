@@ -48,7 +48,7 @@ public class DataSource {
 	 */
 	private DataSource() {
 		try {
-			DriverManager.registerDriver(new com.mysql.jdbc.Driver());
+			DriverManager.registerDriver(new com.mysql.cj.jdbc.Driver());
 		} catch(SQLException e) {
 			System.out.println(e.getMessage());
 		}

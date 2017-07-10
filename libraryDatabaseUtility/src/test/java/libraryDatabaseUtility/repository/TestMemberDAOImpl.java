@@ -5,6 +5,7 @@ package libraryDatabaseUtility.repository;
 
 import static org.junit.Assert.*;
 
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -37,6 +38,7 @@ public class TestMemberDAOImpl {
 		book = new Book();
 		member = new Member();
 		source = DataSource.getInstance();
+		
 	}
 
 	@Test
