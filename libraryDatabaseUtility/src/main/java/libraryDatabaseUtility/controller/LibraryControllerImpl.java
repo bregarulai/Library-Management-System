@@ -47,7 +47,7 @@ public class LibraryControllerImpl implements LibraryController {
 	 * @see libraryDatabaseUtility.controller.LibraryController#displayBooks()
 	 */
 	public void displayBooks() {
-		List<Book> books = new ArrayList<Book>();
+		List<Book> books;
 		try {
 			books = bookDao.getAllBooks(source);
 			view.displayBooks(books);
@@ -90,7 +90,13 @@ public class LibraryControllerImpl implements LibraryController {
 	 * @see libraryDatabaseUtility.controller.LibraryController#searchBook(java.lang.String)
 	 */
 	public void searchBook(String title) {
-		// TODO Auto-generated method stub
+		List<Book> books;
+		try {
+			books = bookDao.searchForBooks(source, title);
+			view.displayBooks(books);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 
 	}
 
