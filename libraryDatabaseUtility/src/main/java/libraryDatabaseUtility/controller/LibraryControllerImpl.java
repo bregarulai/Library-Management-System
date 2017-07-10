@@ -135,7 +135,12 @@ public class LibraryControllerImpl implements LibraryController {
 	 * @see libraryDatabaseUtility.controller.LibraryController#deleteMember(long)
 	 */
 	public void deleteMember(long memberId) {
-		// TODO Auto-generated method stub
+		try {
+			int result = memberDao.deleteRecord(source, memberId);
+			view.displayDeletedRecordMessage(result);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 
 	}
 
