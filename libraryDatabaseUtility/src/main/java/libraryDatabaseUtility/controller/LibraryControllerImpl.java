@@ -69,7 +69,7 @@ public class LibraryControllerImpl implements LibraryController {
 	 * @see libraryDatabaseUtility.controller.LibraryController#displayMenu()
 	 */
 	public void displayMenu() {
-		
+		view.displayMenu();
 
 	}
 
@@ -77,7 +77,12 @@ public class LibraryControllerImpl implements LibraryController {
 	 * @see libraryDatabaseUtility.controller.LibraryController#deleteBook(long)
 	 */
 	public void deleteBook(long bookId) {
-		// TODO Auto-generated method stub
+		try {
+			int result = bookDao.deleteRecord(source, bookId);
+			view.displayDeletedRecordMessage(result);
+		} catch (SQLException e) {	
+			e.printStackTrace();
+		}
 
 	}
 
