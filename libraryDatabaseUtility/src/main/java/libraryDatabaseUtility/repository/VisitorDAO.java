@@ -18,7 +18,7 @@ public interface VisitorDAO {
 
 	public int addVisitorToDb(DataSource source, Visitor member) throws SQLException;
 	
-	public List<Visitor> searchForVisitor(DataSource source, String lastName);
+	public List<Visitor> searchForVisitor(DataSource source, String lastName) throws SQLException;
 	
 	public List<Visitor> getVisitorsForThisDate(DataSource source, Date date);
 }
