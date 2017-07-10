@@ -4,6 +4,8 @@
 package libraryDatabaseUtility.controller;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import libraryDatabaseUtility.model.Book;
 import libraryDatabaseUtility.model.DataSource;
@@ -18,17 +20,15 @@ import libraryDatabaseUtility.view.LibraryViewImpl;
  */
 public class LibraryControllerImpl implements LibraryController {
 	
-	DataSource source;
-	LibraryViewImpl view;
-	MemberDAOImpl memberDao;
-	BookDAOImpl bookDao;
+	DataSource source = DataSource.getInstance();
+	LibraryViewImpl view = new LibraryViewImpl();
+	MemberDAOImpl memberDao = new MemberDAOImpl();
+	BookDAOImpl bookDao = new BookDAOImpl();
 
 	/* (non-Javadoc)
 	 * @see libraryDatabaseUtility.controller.LibraryController#addBook(java.lang.String, java.lang.String)
 	 */
 	public void addBook(String title, String author) {
-		source = DataSource.getInstance();
-		view = new LibraryViewImpl();
 		Book book = new Book();
 		book.setBookTitle(title);
 		book.setBookAuthor(author);
@@ -42,14 +42,20 @@ public class LibraryControllerImpl implements LibraryController {
 			e.printStackTrace();
 		}
 		
-
 	}
 
 	/* (non-Javadoc)
 	 * @see libraryDatabaseUtility.controller.LibraryController#displayBooks()
 	 */
 	public void displayBooks() {
-		// TODO Auto-generated method stub
+		List<Book> books = new ArrayList<Book>();
+		try {
+			books = bookDao.getAllBooks(source);
+			view.displayBooks(books);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
 
 	}
 
