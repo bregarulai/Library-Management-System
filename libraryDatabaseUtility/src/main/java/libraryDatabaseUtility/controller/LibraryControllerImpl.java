@@ -148,7 +148,13 @@ public class LibraryControllerImpl implements LibraryController {
 	 * @see libraryDatabaseUtility.controller.LibraryController#searchMember(java.lang.String)
 	 */
 	public void searchMember(String lastName) {
-		// TODO Auto-generated method stub
+		List<Member> members;
+		try {
+			members = memberDao.searchForMembers(source, lastName);
+			view.displayMembers(members);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 
 	}
 
