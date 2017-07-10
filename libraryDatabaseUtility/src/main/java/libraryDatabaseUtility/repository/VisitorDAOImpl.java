@@ -5,7 +5,9 @@ package libraryDatabaseUtility.repository;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -18,6 +20,7 @@ import libraryDatabaseUtility.model.Visitor;
  */
 public class VisitorDAOImpl implements VisitorDAO {
 	private static final String INSERT_VISITOR_SQL = "insert into visitors (firstName, lastName) values (?, ?)";
+	private static final String SEARCH_VISITOR_SQL = "select * from visitors where lastName = ?";
 	
 	public VisitorDAOImpl() {
 		
@@ -45,9 +48,31 @@ public class VisitorDAOImpl implements VisitorDAO {
 	/* (non-Javadoc)
 	 * @see libraryDatabaseUtility.repository.VisitorDAO#searchForVisitor(libraryDatabaseUtility.model.DataSource, java.lang.String)
 	 */
-	public List<Visitor> searchForVisitor(DataSource source, String lastName) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Visitor> searchForVisitor(DataSource source, String lastName) throws SQLException {
+		ResultSet resultSet = null;
+		PreparedStatement statement = null;
+		Connection connection = source.getConnection();
+		List<Visitor> visitors = new ArrayList<Visitor>();
+		
+		statement = connection.prepareStatement(SEARCH_VISITOR_SQL, 
+				ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+		statement.setString(1, lastName);
+		resultSet = statement.executeQuery();
+		
+		// to map resultSet to visitor object
+		while(resultSet.next()) {
+			Visitor visitor = new Visitor();
+			visitor.setVisitorId(resultSet.getLong("ID"));
+			visitor.setFirstName(resultSet.getString("firstName"));
+			visitor.setLastName(resultSet.getString("lastName"));
+			visitors.add(visitor);
+		}
+		
+		resultSet.close();
+		statement.close();
+		connection.close();
+		
+		return visitors;
 	}
 
 	/* (non-Javadoc)
