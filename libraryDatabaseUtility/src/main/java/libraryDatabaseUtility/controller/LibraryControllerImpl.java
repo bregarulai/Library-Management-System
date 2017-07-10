@@ -38,7 +38,6 @@ public class LibraryControllerImpl implements LibraryController {
 			view.displayAddedRecordMessage(result);
 			
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -53,7 +52,6 @@ public class LibraryControllerImpl implements LibraryController {
 			books = bookDao.getAllBooks(source);
 			view.displayBooks(books);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} 
 
@@ -63,15 +61,15 @@ public class LibraryControllerImpl implements LibraryController {
 	 * @see libraryDatabaseUtility.controller.LibraryController#displayLoginScreen(java.lang.String, java.lang.String)
 	 */
 	public boolean displayLoginScreen(String libraryUser, String libraryPassword) {
-		// TODO Auto-generated method stub
-		return false;
+		boolean isValid = view.displayLoginScreen(libraryUser, libraryPassword);
+		return isValid;
 	}
 
 	/* (non-Javadoc)
 	 * @see libraryDatabaseUtility.controller.LibraryController#displayMenu()
 	 */
 	public void displayMenu() {
-		// TODO Auto-generated method stub
+		
 
 	}
 
