@@ -178,6 +178,13 @@ public class LibraryControllerImpl implements LibraryController {
 
 	}
 
+	/**
+	 * @return the source
+	 */
+	public DataSource getSource() {
+		return source;
+	}
+
 	/* (non-Javadoc)
 	 * @see libraryDatabaseUtility.controller.LibraryController#signoutVisitor(long)
 	 */
