@@ -3,6 +3,7 @@
  */
 package libraryDatabaseUtility.repository;
 
+import java.sql.SQLException;
 import java.util.Date;
 import java.util.List;
 
@@ -15,7 +16,7 @@ import libraryDatabaseUtility.model.Visitor;
  */
 public interface VisitorDAO {
 
-	public int addVisitorToDb(DataSource source, Visitor member);
+	public int addVisitorToDb(DataSource source, Visitor member) throws SQLException;
 	
 	public List<Visitor> searchForVisitor(DataSource source, String lastName);
 	
