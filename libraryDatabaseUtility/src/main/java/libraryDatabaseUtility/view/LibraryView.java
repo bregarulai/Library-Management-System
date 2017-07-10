@@ -8,6 +8,7 @@ import java.util.List;
 
 import libraryDatabaseUtility.model.Book;
 import libraryDatabaseUtility.model.Member;
+import libraryDatabaseUtility.model.Visitor;
 
 /**
  * @author Flavio Luis June 2017
@@ -22,6 +23,8 @@ public interface LibraryView {
 	public void displayBooks(List<Book> books);
 	
 	public void displayMembers(List<Member> members);
+	
+	public void displayVisitors(List<Visitor> visitors);
 	
 	public void displayDeletedRecordMessage(int result);
 

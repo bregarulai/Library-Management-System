@@ -10,9 +10,11 @@ import java.util.List;
 import libraryDatabaseUtility.model.Book;
 import libraryDatabaseUtility.model.DataSource;
 import libraryDatabaseUtility.model.Member;
+import libraryDatabaseUtility.model.Visitor;
 import libraryDatabaseUtility.repository.BookDAOImpl;
 import libraryDatabaseUtility.repository.MemberDAO;
 import libraryDatabaseUtility.repository.MemberDAOImpl;
+import libraryDatabaseUtility.repository.VisitorDAOImpl;
 import libraryDatabaseUtility.view.LibraryViewImpl;
 
 /**
@@ -25,6 +27,7 @@ public class LibraryControllerImpl implements LibraryController {
 	LibraryViewImpl view = new LibraryViewImpl();
 	MemberDAOImpl memberDao = new MemberDAOImpl();
 	BookDAOImpl bookDao = new BookDAOImpl();
+	VisitorDAOImpl visitorDao = new VisitorDAOImpl();
 
 	/* (non-Javadoc)
 	 * @see libraryDatabaseUtility.controller.LibraryController#addBook(java.lang.String, java.lang.String)
@@ -162,7 +165,15 @@ public class LibraryControllerImpl implements LibraryController {
 	 * @see libraryDatabaseUtility.controller.LibraryController#registerVisitor(java.lang.String, java.lang.String)
 	 */
 	public void registerVisitor(String firstName, String lastName) {
-		// TODO Auto-generated method stub
+		Visitor visitor = new Visitor();
+		visitor.setFirstName(firstName);
+		visitor.setLastName(lastName);
+		
+		try {
+			int result = visitorDao.addVisitorToDb(source, visitor);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 
 	}
 
