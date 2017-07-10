@@ -9,6 +9,7 @@ import java.util.List;
 
 import libraryDatabaseUtility.model.Book;
 import libraryDatabaseUtility.model.DataSource;
+import libraryDatabaseUtility.model.Member;
 import libraryDatabaseUtility.repository.BookDAOImpl;
 import libraryDatabaseUtility.repository.MemberDAO;
 import libraryDatabaseUtility.repository.MemberDAOImpl;
@@ -104,7 +105,15 @@ public class LibraryControllerImpl implements LibraryController {
 	 * @see libraryDatabaseUtility.controller.LibraryController#addMember(java.lang.String, java.lang.String)
 	 */
 	public void addMember(String firstName, String lastName) {
-		// TODO Auto-generated method stub
+		Member member = new Member();
+		member.setFirstName(firstName);
+		member.setLastName(lastName);
+		try {
+			int result = memberDao.addCustomerToDb(source, member);
+			view.displayAddedRecordMessage(result);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 
 	}
 
