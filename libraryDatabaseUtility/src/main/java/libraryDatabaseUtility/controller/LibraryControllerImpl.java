@@ -171,6 +171,7 @@ public class LibraryControllerImpl implements LibraryController {
 		
 		try {
 			int result = visitorDao.addVisitorToDb(source, visitor);
+			view.displayAddedRecordMessage(result);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

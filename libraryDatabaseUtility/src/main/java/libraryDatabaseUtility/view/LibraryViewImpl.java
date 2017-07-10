@@ -10,6 +10,7 @@ import javax.swing.JPasswordField;
 
 import libraryDatabaseUtility.model.Book;
 import libraryDatabaseUtility.model.Member;
+import libraryDatabaseUtility.model.Visitor;
 
 /**
  * @author Flavio Luis June 2017
@@ -145,5 +146,10 @@ public class LibraryViewImpl implements LibraryView {
 		else {
 			System.out.println("\nError while attempting to add record!");
 		}
+	}
+
+	public void displayVisitors(List<Visitor> visitors) {
+		// TODO Auto-generated method stub
+		
 	}
 }
