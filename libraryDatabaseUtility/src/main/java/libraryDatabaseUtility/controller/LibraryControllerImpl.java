@@ -121,7 +121,13 @@ public class LibraryControllerImpl implements LibraryController {
 	 * @see libraryDatabaseUtility.controller.LibraryController#displayMembers()
 	 */
 	public void displayMembers() {
-		// TODO Auto-generated method stub
+		List<Member> members;
+		try {
+			members = memberDao.getAllMembers(source);
+			view.displayMembers(members);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 
 	}
 
