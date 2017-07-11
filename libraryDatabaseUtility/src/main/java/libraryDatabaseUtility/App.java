@@ -13,7 +13,7 @@ import libraryDatabaseUtility.controller.LibraryControllerImpl;
  */
 public class App {
 	private static final int MAX_LOGIN_ATTEMPTS = 5;
-	private static final int QUIT_SENTINEL = 9;
+	private static final int QUIT_SENTINEL = 15;
 
 	public static void main(String[] args) {
 		
@@ -128,8 +128,8 @@ public class App {
 		// menu option to search a member
 		case 10:
 			System.out.println("\nEnter member's last name: ");
-			String lName = input.nextLine();
-			libraryController.searchMember(lName);
+			String memberLastName = input.nextLine();
+			libraryController.searchMember(memberLastName);
 			break;
 			
 		// menu option to display members with late fees
@@ -142,7 +142,23 @@ public class App {
 			
 			break;
 			
-		
+		// menu option to register visitor
+		case 13:
+			System.out.println("\nEnter first name: ");
+			String visitorFirstName = input.nextLine();
+			System.out.println("Enter last name");
+			String visitorLastName = input.nextLine();
+			libraryController.registerVisitor(visitorFirstName, visitorLastName);
+			break;
+			
+		// menu option to display today's visitors
+		case 14:
+			
+			break;
+			
+		default:
+			System.out.println("\nInvalid choice");
+			break;
 			
 		}
 		
