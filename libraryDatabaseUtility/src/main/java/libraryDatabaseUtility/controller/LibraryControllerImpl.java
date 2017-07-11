@@ -4,7 +4,6 @@
 package libraryDatabaseUtility.controller;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 import libraryDatabaseUtility.model.Book;
@@ -12,7 +11,6 @@ import libraryDatabaseUtility.model.DataSource;
 import libraryDatabaseUtility.model.Member;
 import libraryDatabaseUtility.model.Visitor;
 import libraryDatabaseUtility.repository.BookDAOImpl;
-import libraryDatabaseUtility.repository.MemberDAO;
 import libraryDatabaseUtility.repository.MemberDAOImpl;
 import libraryDatabaseUtility.repository.VisitorDAOImpl;
 import libraryDatabaseUtility.view.LibraryViewImpl;
