@@ -118,6 +118,13 @@ public class App {
 			libraryController.displayMembers();
 			break;
 			
+		// menu option to delete a member from database
+		case 9:
+			System.out.println("\nEnter member Id: ");
+			int customerId = input.nextInt();
+			libraryController.deleteMember(customerId);
+			break;
+			
 		
 			
 		}
