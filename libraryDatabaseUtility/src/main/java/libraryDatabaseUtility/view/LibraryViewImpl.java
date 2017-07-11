@@ -84,8 +84,8 @@ public class LibraryViewImpl implements LibraryView {
 	public void displayMenu() {
 		System.out.println("\n\t\t\tMAIN MENU");
 		System.out.println("\t\t\t---------");
-		System.out.println("[1] Add Book\t\t\t[7] Add Member\t\t\t[] Register Visitor");
-		System.out.println("[2] Display All Books\t\t[8] Display All Member\t\t[] Display Visitor today's Visitors");
+		System.out.println("[1] Add Book\t\t\t[7] Add Member\t\t\t[13] Register Visitor");
+		System.out.println("[2] Display All Books\t\t[8] Display All Member\t\t[14] Display Visitor today's Visitors");
 		System.out.println("[3] Delete a Book\t\t\t[9] Delete a Member");
 		System.out.println("[4] Search a Book\t\t\t[10] Search a Member");
 		System.out.println("[5] Display checkout Books\t\t[11] Dislay Member with Late Fees");
