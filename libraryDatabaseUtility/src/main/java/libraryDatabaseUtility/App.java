@@ -125,6 +125,13 @@ public class App {
 			libraryController.deleteMember(customerId);
 			break;
 			
+		// menu option to search a member
+		case 10:
+			System.out.println("\nEnter member's last name: ");
+			String lName = input.nextLine();
+			libraryController.searchMember(lName);
+			break;
+			
 		
 			
 		}
