@@ -113,7 +113,13 @@ public class App {
 			libraryController.addMember(firstName, lastName);
 			break;
 			
+		// menu option to display all members in database
+		case 8:
+			libraryController.displayMembers();
+			break;
+			
 		
+			
 		}
 		
 	}
