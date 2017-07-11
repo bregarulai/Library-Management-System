@@ -103,6 +103,17 @@ public class App {
 		case 6:
 			
 			break;
+			
+		//menu option to add member to database
+		case 7:
+			System.out.println("\nEnter first name: ");
+			String firstName = input.nextLine();
+			System.out.println("Enter last name: ");
+			String lastName = input.nextLine();
+			libraryController.addMember(firstName, lastName);
+			break;
+			
+		
 		}
 		
 	}
