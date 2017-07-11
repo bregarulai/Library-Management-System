@@ -87,8 +87,12 @@ public class App {
 			libraryController.deleteBook(bookId);
 			break;
 			
-		
-			
+		// menu option to search a book from database
+		case 4:
+			System.out.println("\nEnter book's title: ");
+			String bookTitle = input.nextLine();
+			libraryController.searchBook(bookTitle);
+			break;
 		}
 		
 	}
