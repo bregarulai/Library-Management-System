@@ -57,11 +57,26 @@ public class App {
 			System.out.print("Enter choice: ");
 			choice = input.nextInt();
 		}
-
+		
+		System.out.println("\nGood Bye!");
+		input.close();
 	}
 	
 	private static void processUserChoice(LibraryControllerImpl libraryController, Scanner input, int choice) {
 		
+		// To execute different menu choices
+		switch(choice) {
+		// menu option to add book to the database
+		case 1:
+			System.out.println("\nEnter book title: ");
+			String title = input.nextLine();
+			System.out.println("Enter book author: ");
+			String author = input.nextLine();
+			libraryController.addBook(title, author);
+			break;
+			
+		case 2:
+		}
 		
 	}
 
