@@ -74,8 +74,21 @@ public class App {
 			String author = input.nextLine();
 			libraryController.addBook(title, author);
 			break;
-			
+		
+		// menu option to display all books from the database
 		case 2:
+			libraryController.displayBooks();
+			break;
+			
+		// menu option to delete a boook from database
+		case 3:
+			System.out.println("\nEnter book Id: ");
+			int bookId = input.nextInt();
+			libraryController.deleteBook(bookId);
+			break;
+			
+		
+			
 		}
 		
 	}
