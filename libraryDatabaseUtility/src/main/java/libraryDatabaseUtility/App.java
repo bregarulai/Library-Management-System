@@ -46,7 +46,23 @@ public class App {
 		System.out.println("Enter choice: ");
 		choice = input.nextInt();
 		
+		// to keep displaying main menu to the user
+		// until a sentinel value is entered
+		while(choice != QUIT_SENTINEL) {
+			input.nextLine();
+			
+			processUserChoice(libraryController, input, choice);
+			
+			libraryController.displayMenu();
+			System.out.print("Enter choice: ");
+			choice = input.nextInt();
+		}
 
+	}
+	
+	private static void processUserChoice(LibraryControllerImpl libraryController, Scanner input, int choice) {
+		
+		
 	}
 
 }
