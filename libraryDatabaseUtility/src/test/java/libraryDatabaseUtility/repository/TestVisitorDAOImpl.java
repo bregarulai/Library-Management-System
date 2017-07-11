@@ -3,6 +3,8 @@ package libraryDatabaseUtility.repository;
 
 import static org.junit.Assert.*;
 
+import java.sql.SQLException;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -29,7 +31,12 @@ public class TestVisitorDAOImpl {
 	@Test
 	public void testVisitorAddedToDatabase() {
 		int result = 1;
-		assertEquals(target.addVisitorToDb(source, visitor), result);
+		try {
+			assertEquals(target.addVisitorToDb(source, visitor), result);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 	}
 	
@@ -37,8 +44,14 @@ public class TestVisitorDAOImpl {
 	public void testSearchVisitorReturnsCorrectResult() {
 		visitor.setFirstName("Mike");
 		visitor.setLastName("Myers");
-		target.addVisitorToDb(source, visitor);
-		assertEquals(target.searchForVisitor(source, visitor.getLastName()), visitor);
+		try {
+			target.addVisitorToDb(source, visitor);
+			assertEquals(target.searchForVisitor(source, visitor.getLastName()), visitor);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 
 }
