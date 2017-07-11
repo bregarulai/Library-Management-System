@@ -132,6 +132,16 @@ public class App {
 			libraryController.searchMember(lName);
 			break;
 			
+		// menu option to display members with late fees
+		case 11:
+			
+			break;
+			
+		// menu option to display members with no fees
+		case 12:
+			
+			break;
+			
 		
 			
 		}
