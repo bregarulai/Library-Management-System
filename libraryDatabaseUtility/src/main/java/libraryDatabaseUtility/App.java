@@ -93,6 +93,16 @@ public class App {
 			String bookTitle = input.nextLine();
 			libraryController.searchBook(bookTitle);
 			break;
+			
+		// menu option to display checkout books
+		case 5:
+			
+			break;
+			
+		// menu option to display available books
+		case 6:
+			
+			break;
 		}
 		
 	}
