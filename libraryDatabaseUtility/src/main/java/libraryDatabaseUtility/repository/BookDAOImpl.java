@@ -24,6 +24,7 @@ public class BookDAOImpl implements BookDAO {
 	private static final String DELETE_RECORD_SQL = "delete from books where ID = ?";
 	private static final String SEARCH_BOOK_SQL = "select * from books where title = ?";
 	private static final String UPDATE_AVAILABLE_COLUMN_SQL = "update books set available = ? where ID = ?";
+	private static final String UPDATE_MEMBER_ID_COLUMN_SQL = "update books set memberId = ? where ID = ?";
 	
 	// no arg constructor
 	public BookDAOImpl() {
@@ -144,6 +145,20 @@ public class BookDAOImpl implements BookDAO {
 		statement = connection.prepareStatement(UPDATE_AVAILABLE_COLUMN_SQL);
 		statement.setBoolean(1, book.isAvailable());
 		statement.setLong(2, book.getBookId());
+		
+		result = statement.executeUpdate();
+		
+		return result;
+	}
+
+	public int updateBookMemberIdColumn(DataSource source, Long bookId, Long memberId) throws SQLException {
+		int result = 0;
+		Connection connection = source.getConnection();
+		PreparedStatement statement = null;
+		
+		statement = connection.prepareStatement(UPDATE_MEMBER_ID_COLUMN_SQL);
+		statement.setLong(1, memberId);
+		statement.setLong(2, bookId);
 		
 		result = statement.executeUpdate();
 		

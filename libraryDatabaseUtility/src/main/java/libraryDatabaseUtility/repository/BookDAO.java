@@ -30,4 +30,6 @@ public interface BookDAO {
 	public Book getBook(DataSource source, long id);
 	
 	public int updateBookAvailableColumn(DataSource source, Book book) throws SQLException;
+	
+	public int updateBookMemberIdColumn(DataSource source, Long bookId, Long MemberId) throws SQLException;
 }
