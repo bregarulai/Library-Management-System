@@ -43,7 +43,7 @@ public class App {
 		Scanner input = new Scanner(System.in);
 		int choice;
 		
-		System.out.println("Enter choice: ");
+		System.out.print("\nEnter choice: ");
 		choice = input.nextInt();
 		
 		// to keep displaying main menu to the user
@@ -54,7 +54,7 @@ public class App {
 			processUserChoice(libraryController, input, choice);
 			
 			libraryController.displayMenu();
-			System.out.print("Enter choice: ");
+			System.out.print("\nEnter choice: ");
 			choice = input.nextInt();
 		}
 		
@@ -68,9 +68,9 @@ public class App {
 		switch(choice) {
 		// menu option to add book to the database
 		case 1:
-			System.out.println("\nEnter book title: ");
+			System.out.print("\nEnter book title: ");
 			String title = input.nextLine();
-			System.out.println("Enter book author: ");
+			System.out.print("Enter book author: ");
 			String author = input.nextLine();
 			libraryController.addBook(title, author);
 			break;
@@ -82,14 +82,14 @@ public class App {
 			
 		// menu option to delete a boook from database
 		case 3:
-			System.out.println("\nEnter book Id: ");
+			System.out.print("\nEnter book Id: ");
 			int bookId = input.nextInt();
 			libraryController.deleteBook(bookId);
 			break;
 			
 		// menu option to search a book from database
 		case 4:
-			System.out.println("\nEnter book's title: ");
+			System.out.print("\nEnter book's title: ");
 			String bookTitle = input.nextLine();
 			libraryController.searchBook(bookTitle);
 			break;
@@ -106,9 +106,9 @@ public class App {
 			
 		//menu option to add member to database
 		case 7:
-			System.out.println("\nEnter first name: ");
+			System.out.print("\nEnter first name: ");
 			String firstName = input.nextLine();
-			System.out.println("Enter last name: ");
+			System.out.print("Enter last name: ");
 			String lastName = input.nextLine();
 			libraryController.addMember(firstName, lastName);
 			break;
@@ -120,14 +120,14 @@ public class App {
 			
 		// menu option to delete a member from database
 		case 9:
-			System.out.println("\nEnter member Id: ");
+			System.out.print("\nEnter member Id: ");
 			int customerId = input.nextInt();
 			libraryController.deleteMember(customerId);
 			break;
 			
 		// menu option to search a member
 		case 10:
-			System.out.println("\nEnter member's last name: ");
+			System.out.print("\nEnter member's last name: ");
 			String memberLastName = input.nextLine();
 			libraryController.searchMember(memberLastName);
 			break;
@@ -144,9 +144,9 @@ public class App {
 			
 		// menu option to register visitor
 		case 13:
-			System.out.println("\nEnter first name: ");
+			System.out.print("\nEnter first name: ");
 			String visitorFirstName = input.nextLine();
-			System.out.println("Enter last name");
+			System.out.print("Enter last name");
 			String visitorLastName = input.nextLine();
 			libraryController.registerVisitor(visitorFirstName, visitorLastName);
 			break;

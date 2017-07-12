@@ -64,7 +64,7 @@ public class BookDAOImpl implements BookDAO {
 		// To map resultSet to book object
 		while(resultSet.next()) {
 			Book book = new Book();
-			book.setBookId(resultSet.getLong("bookId"));
+			book.setBookId(resultSet.getLong("ID"));
 			book.setBookTitle(resultSet.getString("title"));
 			book.setBookAuthor(resultSet.getString("author"));
 			book.setAvailable(resultSet.getBoolean("available"));
