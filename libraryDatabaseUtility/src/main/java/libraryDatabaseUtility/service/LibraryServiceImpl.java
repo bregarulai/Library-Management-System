@@ -4,6 +4,7 @@
 package libraryDatabaseUtility.service;
 
 import java.sql.SQLException;
+import java.util.List;
 
 import libraryDatabaseUtility.model.Book;
 import libraryDatabaseUtility.model.DataSource;
@@ -24,12 +25,25 @@ public class LibraryServiceImpl implements LibraryService {
 	 * @see libraryDatabaseUtility.service.LibraryService#checkoutBook(libraryDatabaseUtility.model.DataSource, libraryDatabaseUtility.model.Book)
 	 */
 	public boolean checkoutBook(DataSource source, Book book, String lastName) throws SQLException {
-		Member member = new Member()
+		Member member;
+		boolean flag = false;
+		int availableUpdate = 0;
+		int memberIdUpdate = 0;
+		List<Member> members = memberDao.searchForMembers(source, lastName);
+		member = members.get(0);
+		
 		if(book.isAvailable()) {
 			book.setAvailable(false);
-			bookDao.updateBookAvailableColumn(source, book);
+			availableUpdate = bookDao.updateBookAvailableColumn(source, book);
+			memberIdUpdate = bookDao.updateBookMemberIdColumn(source, book.getBookId(), member.getMemberId());
+			if(availableUpdate == 1 && memberIdUpdate == 1) {
+				flag = true;
+			}
 		}
-		return false;
+		else {
+			System.out.println("\nBook is not available at this moment.");
+		}
+		return flag;
 	}
 
 	/* (non-Javadoc)
@@ -66,6 +80,11 @@ public class LibraryServiceImpl implements LibraryService {
 	 */
 	public void setMemberDAOImpl(MemberDAOImpl memberDAOImpl) {
 		this.memberDao = memberDAOImpl;
+	}
+
+	public boolean checkoutBook(DataSource source, Book book) throws SQLException {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 	
