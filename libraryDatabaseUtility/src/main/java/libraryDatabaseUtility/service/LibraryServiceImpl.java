@@ -3,6 +3,8 @@
  */
 package libraryDatabaseUtility.service;
 
+import java.sql.SQLException;
+
 import libraryDatabaseUtility.model.Book;
 import libraryDatabaseUtility.model.DataSource;
 import libraryDatabaseUtility.repository.BookDAOImpl;
@@ -13,15 +15,18 @@ import libraryDatabaseUtility.repository.MemberDAOImpl;
  *
  */
 public class LibraryServiceImpl implements LibraryService {
-	private BookDAOImpl bookDAOImpl;
+	private BookDAOImpl bookDao = new BookDAOImpl();
 	private MemberDAOImpl memberDAOImpl;
 	
 	
 	/* (non-Javadoc)
 	 * @see libraryDatabaseUtility.service.LibraryService#checkoutBook(libraryDatabaseUtility.model.DataSource, libraryDatabaseUtility.model.Book)
 	 */
-	public boolean checkoutBook(DataSource source, Book book) {
-		// TODO Auto-generated method stub
+	public boolean checkoutBook(DataSource source, Book book) throws SQLException {
+		
+		if(book.isAvailable()) {
+			int result = bookDao.updateBookAvailableColumn(source, book);
+		}
 		return false;
 	}
 

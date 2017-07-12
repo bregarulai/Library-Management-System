@@ -4,6 +4,8 @@
  */
 package libraryDatabaseUtility.service;
 
+import java.sql.SQLException;
+
 import libraryDatabaseUtility.model.Book;
 import libraryDatabaseUtility.model.DataSource;
 
@@ -13,7 +15,7 @@ import libraryDatabaseUtility.model.DataSource;
  */
 public interface LibraryService {
 
-	public boolean checkoutBook(DataSource source, Book book);
+	public boolean checkoutBook(DataSource source, Book book) throws SQLException;
 	
 	public boolean returnBook(DataSource source, Book book);
 }
