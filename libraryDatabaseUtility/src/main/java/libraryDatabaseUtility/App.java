@@ -13,7 +13,7 @@ import libraryDatabaseUtility.controller.LibraryControllerImpl;
  */
 public class App {
 	private static final int MAX_LOGIN_ATTEMPTS = 5;
-	private static final int QUIT_SENTINEL = 15;
+	private static final int QUIT_SENTINEL = 17;
 
 	public static void main(String[] args) {
 		
