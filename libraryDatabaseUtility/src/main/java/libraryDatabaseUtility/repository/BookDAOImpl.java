@@ -133,6 +133,11 @@ public class BookDAOImpl implements BookDAO {
 	public Book getBook(DataSource source, long id) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	public int updateBookAvailableColumn(DataSource source, Book book) throws SQLException {
+		// TODO Auto-generated method stub
+		return 0;
 	}	
 	
 }

@@ -28,4 +28,6 @@ public interface BookDAO {
 	public List<Book> getAvailableBooks(DataSource source);
 	
 	public Book getBook(DataSource source, long id);
+	
+	public int updateBookAvailableColumn(DataSource source, Book book) throws SQLException;
 }
