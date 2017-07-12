@@ -40,8 +40,6 @@ public class VisitorDAOImpl implements VisitorDAO {
 		
 		result = statement.executeUpdate();
 		
-		statement.close();
-		connection.close();
 		return result;
 	}
 
@@ -67,11 +65,7 @@ public class VisitorDAOImpl implements VisitorDAO {
 			visitor.setLastName(resultSet.getString("lastName"));
 			visitors.add(visitor);
 		}
-		
-		resultSet.close();
-		statement.close();
-		connection.close();
-		
+			
 		return visitors;
 	}
 

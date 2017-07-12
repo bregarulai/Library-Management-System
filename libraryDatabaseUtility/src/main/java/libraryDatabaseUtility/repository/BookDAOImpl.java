@@ -22,7 +22,7 @@ public class BookDAOImpl implements BookDAO {
 	private static final String INSERT_BOOK_SQL = "insert into books (title, author) values(?,?)";
 	private static final String SELECT_ALL_BOOKS_SQL = "select * from books";
 	private static final String DELETE_RECORD_SQL = "delete from books where ID = ?";
-	private static final String SEARCH_BOOK_SQL = "select * from books where author = ?";
+	private static final String SEARCH_BOOK_SQL = "select * from books where title = ?";
 	
 	// no arg constructor
 	public BookDAOImpl() {
@@ -43,8 +43,6 @@ public class BookDAOImpl implements BookDAO {
 		
 		result = statement.executeUpdate();
 		
-		statement.close();
-		connection.close();
 		return result;
 	}
 
@@ -71,9 +69,6 @@ public class BookDAOImpl implements BookDAO {
 			books.add(book);
 		}
 		
-		resultSet.close();
-		statement.close();
-		connection.close();
 		return books;
 	}
 
@@ -89,8 +84,6 @@ public class BookDAOImpl implements BookDAO {
 		statement.setLong(1, bookId);
 		result = statement.executeUpdate();
 		
-		statement.close();
-		connection.close();
 		return result;
 	}
 
@@ -110,16 +103,14 @@ public class BookDAOImpl implements BookDAO {
 		// To map resultSet to book object
 		while(resultSet.next()) {
 			Book book = new Book();
-			book.setBookId(resultSet.getLong("book_id"));
+			book.setBookId(resultSet.getLong("ID"));
 			book.setBookTitle(resultSet.getString("title"));
 			book.setBookAuthor(resultSet.getString("author"));
 			book.setAvailable(resultSet.getBoolean("available"));
+			System.out.println(book.toString());
 			books.add(book);
 		}
 		
-		resultSet.close();
-		statement.close();
-		connection.close();
 		return books;
 	}
 
@@ -142,7 +133,6 @@ public class BookDAOImpl implements BookDAO {
 	public Book getBook(DataSource source, long id) {
 		// TODO Auto-generated method stub
 		return null;
-	}
-	
+	}	
 	
 }

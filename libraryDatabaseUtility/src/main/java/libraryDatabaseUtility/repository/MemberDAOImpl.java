@@ -43,9 +43,7 @@ public class MemberDAOImpl implements MemberDAO {
 		statement.setString(2, member.getLastName());
 		
 		result = statement.executeUpdate();
-		
-		statement.close();
-		connection.close();
+	
 		return result;
 	}
 
@@ -62,8 +60,6 @@ public class MemberDAOImpl implements MemberDAO {
 		
 		result = statement.executeUpdate();
 		
-		statement.close();
-		connection.close();
 		return result;
 	}
 
@@ -91,9 +87,6 @@ public class MemberDAOImpl implements MemberDAO {
 			members.add(member);
 		}
 		
-		resultSet.close();
-		statement.close();
-		connection.close();
 		return members;
 	}
 
@@ -121,9 +114,6 @@ public class MemberDAOImpl implements MemberDAO {
 			members.add(member);
 		}
 		
-		resultSet.close();
-		statement.close();
-		connection.close();
 		return members;
 	}
 

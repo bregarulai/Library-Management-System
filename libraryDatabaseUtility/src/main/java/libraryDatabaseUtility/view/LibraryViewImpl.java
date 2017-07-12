@@ -128,7 +128,7 @@ public class LibraryViewImpl implements LibraryView {
 	 */
 	public void displayDeletedRecordMessage(int result) {
 		if(result == 1) {
-			System.out.println(result + " record deleted sucessfully");
+			System.out.println("\n" + result + " record deleted sucessfully");
 		}
 		else {
 			System.out.println("\nError while attempting to delete record!");
