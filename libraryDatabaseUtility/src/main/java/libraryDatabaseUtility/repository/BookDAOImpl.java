@@ -133,7 +133,7 @@ public class BookDAOImpl implements BookDAO {
 	}
 
 	public Book getBook(DataSource source, long id) throws SQLException {
-		List<Book> books = new ArrayList<Book>();
+		Book book = new Book();
 		ResultSet resultSet = null;
 		PreparedStatement statement = null;
 		Connection connection = source.getConnection();
@@ -143,15 +143,13 @@ public class BookDAOImpl implements BookDAO {
 		resultSet = statement.executeQuery();
 		
 		// To map resultSet to book object
-		while(resultSet.next()) {
-			Book book = new Book();
+		while(resultSet.next()) {			
 			book.setBookId(resultSet.getLong("ID"));
 			book.setBookTitle(resultSet.getString("title"));
 			book.setBookAuthor(resultSet.getString("author"));
-			book.setAvailable(resultSet.getBoolean("available"));
-			books.add(book);
+			book.setAvailable(resultSet.getBoolean("available"));			
 		}
-		return null;
+		return book;
 	}
 
 	public int updateBookAvailableColumn(DataSource source, Book book) throws SQLException {
