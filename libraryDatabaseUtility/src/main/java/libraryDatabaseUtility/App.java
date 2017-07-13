@@ -151,7 +151,7 @@ public class App {
 			libraryController.registerVisitor(visitorFirstName, visitorLastName);
 			break;
 			
-		// menu option to display today's visitors
+		// menu option to display visitors for a date
 		case 14:
 			System.out.println("/nEnter date: ");
 			String date = input.nextLine();
