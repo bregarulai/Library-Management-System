@@ -150,7 +150,15 @@ public class LibraryViewImpl implements LibraryView {
 	}
 
 	public void displayVisitors(List<Visitor> visitors) {
-		// TODO Auto-generated method stub
+		String format = "%-20s%-25s%-25s%-25s%-25s%-25s\n";
+		System.out.format(format, "\nVisitor Id", "First Name", "Last Name", "Date of Visit", "Time In", "Time Out");
+		System.out.format(format, "==========", "============", "===========", "=============", "=========", "=========");
+		
+		for(Visitor visitor : visitors) {
+			System.out.format(format, visitor.getVisitorId(), visitor.getFirstName(),
+					visitor.getLastName(), visitor.getDateOfvisit().toString(), 
+					visitor.getTimeIn().toString(), visitor.getTimeout().toString());
+		}
 		
 	}
 	

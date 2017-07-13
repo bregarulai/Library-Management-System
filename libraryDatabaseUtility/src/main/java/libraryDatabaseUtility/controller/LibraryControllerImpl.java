@@ -201,10 +201,17 @@ public class LibraryControllerImpl implements LibraryController {
 			isAvailable = libraryService.checkoutBook(source, book, lastName);
 			view.displayBookCheckoutMessage(isAvailable);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+			
+	}
+	
+	public void getVisitorForDate(String date) {
+		try {
+			List<Visitor> visitors = visitorDao.getVisitorsForThisDate(source, date);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		
 	}
 
