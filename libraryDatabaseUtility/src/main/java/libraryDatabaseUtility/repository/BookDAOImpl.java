@@ -25,6 +25,7 @@ public class BookDAOImpl implements BookDAO {
 	private static final String SEARCH_BOOK_SQL = "select * from books where title = ?";
 	private static final String UPDATE_AVAILABLE_COLUMN_SQL = "update books set available = ? where ID = ?";
 	private static final String UPDATE_MEMBER_ID_COLUMN_SQL = "update books set memberId = ? where ID = ?";
+	private static final String GET_BOOK_SQL = "select * from books where ID = ?";
 	
 	// no arg constructor
 	public BookDAOImpl() {
@@ -131,8 +132,25 @@ public class BookDAOImpl implements BookDAO {
 		return null;
 	}
 
-	public Book getBook(DataSource source, long id) {
-		// TODO Auto-generated method stub
+	public Book getBook(DataSource source, long id) throws SQLException {
+		List<Book> books = new ArrayList<Book>();
+		ResultSet resultSet = null;
+		PreparedStatement statement = null;
+		Connection connection = source.getConnection();
+		
+		statement = connection.prepareStatement(GET_BOOK_SQL);
+		statement.setLong(1, id);
+		resultSet = statement.executeQuery();
+		
+		// To map resultSet to book object
+		while(resultSet.next()) {
+			Book book = new Book();
+			book.setBookId(resultSet.getLong("ID"));
+			book.setBookTitle(resultSet.getString("title"));
+			book.setBookAuthor(resultSet.getString("author"));
+			book.setAvailable(resultSet.getBoolean("available"));
+			books.add(book);
+		}
 		return null;
 	}
 
