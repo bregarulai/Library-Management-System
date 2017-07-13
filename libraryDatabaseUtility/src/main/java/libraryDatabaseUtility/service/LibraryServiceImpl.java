@@ -88,7 +88,5 @@ public class LibraryServiceImpl implements LibraryService {
 		// TODO Auto-generated method stub
 		return false;
 	}
-
 	
-
 }

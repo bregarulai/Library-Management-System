@@ -139,6 +139,5 @@ public class Member {
 				"\nLast Name: " + lastName + "\nBooks: \n"
 				+ books.toString();
 	}
-	
-	
+		
 }

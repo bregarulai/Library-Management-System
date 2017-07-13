@@ -4,7 +4,6 @@
 package libraryDatabaseUtility.repository;
 
 import java.sql.SQLException;
-import java.util.Date;
 import java.util.List;
 
 import libraryDatabaseUtility.model.DataSource;
@@ -20,5 +19,5 @@ public interface VisitorDAO {
 	
 	public List<Visitor> searchForVisitor(DataSource source, String lastName) throws SQLException;
 	
-	public List<Visitor> getVisitorsForThisDate(DataSource source, Date date);
+	public List<Visitor> getVisitorsForThisDate(DataSource source, String date) throws SQLException;
 }
