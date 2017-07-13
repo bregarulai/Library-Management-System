@@ -209,6 +209,7 @@ public class LibraryControllerImpl implements LibraryController {
 	public void getVisitorForDate(String date) {
 		try {
 			List<Visitor> visitors = visitorDao.getVisitorsForThisDate(source, date);
+			view.displayVisitors(visitors);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
