@@ -156,6 +156,14 @@ public class App {
 			
 			break;
 			
+		// menu option to checkout a book
+		case 15:
+			System.out.print("\nEnter member last name: ");
+			String memberLname = input.nextLine();
+			System.out.print("Enter book title: ");
+			String bTitle = input.nextLine();
+			libraryController.checkoutBook(bTitle, memberLname);
+						
 		default:
 			System.out.println("\nInvalid choice");
 			break;

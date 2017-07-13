@@ -13,6 +13,7 @@ import libraryDatabaseUtility.model.Visitor;
 import libraryDatabaseUtility.repository.BookDAOImpl;
 import libraryDatabaseUtility.repository.MemberDAOImpl;
 import libraryDatabaseUtility.repository.VisitorDAOImpl;
+import libraryDatabaseUtility.service.LibraryServiceImpl;
 import libraryDatabaseUtility.view.LibraryViewImpl;
 
 /**
@@ -26,6 +27,7 @@ public class LibraryControllerImpl implements LibraryController {
 	MemberDAOImpl memberDao = new MemberDAOImpl();
 	BookDAOImpl bookDao = new BookDAOImpl();
 	VisitorDAOImpl visitorDao = new VisitorDAOImpl();
+	LibraryServiceImpl libraryService = new LibraryServiceImpl();
 
 	/* (non-Javadoc)
 	 * @see libraryDatabaseUtility.controller.LibraryController#addBook(java.lang.String, java.lang.String)
@@ -189,6 +191,21 @@ public class LibraryControllerImpl implements LibraryController {
 	public void signoutVisitor(long visitorId) {
 		// TODO Auto-generated method stub
 
+	}
+	
+	public void checkoutBook(String bookTitle, String lastName) {
+		boolean isAvailable;
+		try {
+			List<Book> books = bookDao.searchForBooks(source, bookTitle);
+			Book book = books.get(0);
+			isAvailable = libraryService.checkoutBook(source, book, lastName);
+			view.displayBookCheckoutMessage(isAvailable);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
 	}
 
 }

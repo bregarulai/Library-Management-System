@@ -153,4 +153,13 @@ public class LibraryViewImpl implements LibraryView {
 		// TODO Auto-generated method stub
 		
 	}
+	
+	public void displayBookCheckoutMessage(boolean available) {
+		if(available) {
+			System.out.println("Book checkout successfully!");
+		}
+		else {
+			System.out.println("Book cannot be checkout.");
+		}
+	}
 }
