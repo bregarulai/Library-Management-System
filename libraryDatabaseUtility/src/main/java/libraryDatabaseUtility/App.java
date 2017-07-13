@@ -96,7 +96,7 @@ public class App {
 			
 		// menu option to display checkout books
 		case 5:
-			
+			libraryController.displayCheckoutBooks();
 			break;
 			
 		// menu option to display available books

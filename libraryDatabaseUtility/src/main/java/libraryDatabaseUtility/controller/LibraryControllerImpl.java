@@ -215,5 +215,14 @@ public class LibraryControllerImpl implements LibraryController {
 		}
 		
 	}
+	
+	public void displayCheckoutBooks() {
+		try {
+			List<Book> books = bookDao.getCheckoutBooks(source);
+			view.displayCheckoutBooks(books);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
 
 }
