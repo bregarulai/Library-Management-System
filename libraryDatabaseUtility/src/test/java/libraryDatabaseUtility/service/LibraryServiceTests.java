@@ -67,7 +67,12 @@ public class LibraryServiceTests {
 	@Test
 	public void testBookExistOnDatabase() {
 		BookDAOImpl bookDAO = new BookDAOImpl();
-		book = bookDAO.getBook(source, BOOK_ID);
+		try {
+			book = bookDAO.getBook(source, BOOK_ID);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		assertNotNull(book);
 		assertTrue(book instanceof Book);		
