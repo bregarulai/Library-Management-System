@@ -153,7 +153,9 @@ public class App {
 			
 		// menu option to display today's visitors
 		case 14:
-			
+			System.out.println("/nEnter date: ");
+			String date = input.nextLine();
+			libraryController.getVisitorForDate(date);
 			break;
 			
 		// menu option to checkout a book
