@@ -151,7 +151,7 @@ public class LibraryViewImpl implements LibraryView {
 
 	public void displayVisitors(List<Visitor> visitors) {
 		String format = "%-20s%-25s%-25s%-25s%-25s%-25s\n";
-		System.out.format(format, "\nVisitor Id", "First Name", "Last Name", "Date of Visit", "Time In", "Time Out");
+		System.out.format(format, "\nVisitor Id", " First Name", " Last Name", " Date of Visit", " Time In", " Time Out");
 		System.out.format(format, "==========", "============", "===========", "=============", "=========", "=========");
 		
 		for(Visitor visitor : visitors) {

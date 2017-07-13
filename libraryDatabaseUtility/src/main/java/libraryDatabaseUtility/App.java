@@ -153,9 +153,9 @@ public class App {
 			
 		// menu option to display visitors for a date
 		case 14:
-			System.out.println("/nEnter date: ");
-			String date = input.nextLine();
-			libraryController.getVisitorForDate(date);
+			System.out.println("\nEnter date: ");
+			String dateInput = input.nextLine();
+			libraryController.getVisitorForDate(dateInput);
 			break;
 			
 		// menu option to checkout a book

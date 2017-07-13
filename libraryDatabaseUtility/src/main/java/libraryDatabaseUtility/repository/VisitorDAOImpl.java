@@ -90,8 +90,8 @@ public class VisitorDAOImpl implements VisitorDAO {
 			visitor.setFirstName(resultSet.getString("firstName"));
 			visitor.setLastName(resultSet.getString("lastName"));
 			visitor.setDateOfvisit(resultSet.getDate("dateOfVisit"));
-			visitor.setTimeIn(resultSet.getDate("timeIn"));
-			visitor.setTimeout(resultSet.getDate("timeOut"));
+			visitor.setTimeIn(resultSet.getTime("timeIn"));
+			visitor.setTimeout(resultSet.getTime("timeOut"));
 			visitors.add(visitor);
 		}
 				

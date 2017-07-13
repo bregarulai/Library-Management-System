@@ -23,7 +23,7 @@ public interface BookDAO {
 	
 	public List<Book> searchForBooks(DataSource source, String title) throws SQLException;
 	
-	public List<Book> getCheckoutBooks(DataSource source);
+	public List<Book> getCheckoutBooks(DataSource source) throws SQLException;
 	
 	public List<Book> getAvailableBooks(DataSource source);
 	
