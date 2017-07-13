@@ -101,7 +101,7 @@ public class App {
 			
 		// menu option to display available books
 		case 6:
-			
+			libraryController.displayAvailableBooks();
 			break;
 			
 		//menu option to add member to database

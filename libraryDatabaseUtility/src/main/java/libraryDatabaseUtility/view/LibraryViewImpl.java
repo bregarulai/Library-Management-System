@@ -110,7 +110,7 @@ public class LibraryViewImpl implements LibraryView {
 	}
 	
 	public void displayCheckoutBooks(List<Book> books) {
-		String format = "%-15s%-30s%-25s%-4s%-20s\n";
+		String format = "%-15s%-30s%-25s%-20s%-20s\n";
 		System.out.format(format, "\nBook Id", " Book Title", " Book Author", " Available", " checkout Date");
 		System.out.format(format, "========", "==========", "===========", "=========", "================");
 		

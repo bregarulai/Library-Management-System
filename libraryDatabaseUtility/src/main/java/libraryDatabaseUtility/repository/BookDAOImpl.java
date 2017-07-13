@@ -26,7 +26,8 @@ public class BookDAOImpl implements BookDAO {
 	private static final String UPDATE_AVAILABLE_COLUMN_SQL = "update books set available = ? where ID = ?";
 	private static final String UPDATE_MEMBER_ID_COLUMN_SQL = "update books set memberId = ? where ID = ?";
 	private static final String GET_BOOK_SQL = "select * from books where ID = ?";
-	private static final String GET_CHECKOUT_BOOKS = "select * from books where available = false";
+	private static final String GET_CHECKOUT_BOOKS_SQL = "select * from books where available = false";
+	private static final String GET_AVAILABLE_BOOKS_SQL = "select * from books where available = true";
 	
 	// no arg constructor
 	public BookDAOImpl() {
@@ -126,7 +127,7 @@ public class BookDAOImpl implements BookDAO {
 		PreparedStatement statement = null;
 		Connection connection = source.getConnection();
 		
-		statement = connection.prepareStatement(GET_CHECKOUT_BOOKS);
+		statement = connection.prepareStatement(GET_CHECKOUT_BOOKS_SQL);
 		
 		resultSet = statement.executeQuery();
 		
@@ -146,9 +147,27 @@ public class BookDAOImpl implements BookDAO {
 	/* (non-Javadoc)
 	 * @see libraryDatabaseUtility.repository.BookDAO#getAvailableBooks(libraryDatabaseUtility.model.DataSource)
 	 */
-	public List<Book> getAvailableBooks(DataSource source) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Book> getAvailableBooks(DataSource source) throws SQLException {
+		List<Book> books = new ArrayList<Book>();
+		ResultSet resultSet = null;
+		PreparedStatement statement = null;
+		Connection connection = source.getConnection();
+		
+		statement = connection.prepareStatement(GET_AVAILABLE_BOOKS_SQL);
+		
+		resultSet = statement.executeQuery();
+		
+		// To map resultSet to book object
+		while(resultSet.next()) {
+			Book book = new Book();
+			book.setBookId(resultSet.getLong("ID"));
+			book.setBookTitle(resultSet.getString("title"));
+			book.setBookAuthor(resultSet.getString("author"));
+			book.setAvailable(resultSet.getBoolean("available"));
+			
+			books.add(book);
+		}
+		return books;
 	}
 
 	public Book getBook(DataSource source, long id) throws SQLException {

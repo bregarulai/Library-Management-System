@@ -25,7 +25,7 @@ public interface BookDAO {
 	
 	public List<Book> getCheckoutBooks(DataSource source) throws SQLException;
 	
-	public List<Book> getAvailableBooks(DataSource source);
+	public List<Book> getAvailableBooks(DataSource source) throws SQLException;
 	
 	public Book getBook(DataSource source, long id) throws SQLException;
 	

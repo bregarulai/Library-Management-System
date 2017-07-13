@@ -224,5 +224,14 @@ public class LibraryControllerImpl implements LibraryController {
 			e.printStackTrace();
 		}
 	}
+	
+	public void displayAvailableBooks() {
+		try {
+			List<Book> books = bookDao.getAvailableBooks(source);
+			view.displayBooks(books);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
 
 }
