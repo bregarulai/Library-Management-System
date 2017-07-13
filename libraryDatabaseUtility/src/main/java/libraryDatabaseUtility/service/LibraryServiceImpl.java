@@ -4,6 +4,7 @@
 package libraryDatabaseUtility.service;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import libraryDatabaseUtility.model.Book;
@@ -18,7 +19,7 @@ import libraryDatabaseUtility.repository.MemberDAOImpl;
  */
 public class LibraryServiceImpl implements LibraryService {
 	private BookDAOImpl bookDao = new BookDAOImpl();
-	private MemberDAOImpl memberDao;
+	private MemberDAOImpl memberDao = new MemberDAOImpl();
 	
 	
 	/* (non-Javadoc)
@@ -29,7 +30,8 @@ public class LibraryServiceImpl implements LibraryService {
 		boolean flag = false;
 		int availableUpdate = 0;
 		int memberIdUpdate = 0;
-		List<Member> members = memberDao.searchForMembers(source, lastName);
+		List<Member> members = new ArrayList<Member>();
+		members = memberDao.searchForMembers(source, lastName);
 		member = members.get(0);
 		
 		if(book.isAvailable()) {

@@ -1,6 +1,8 @@
 package libraryDatabaseUtility.service;
 
 import static org.junit.Assert.*;
+
+import java.sql.SQLException;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -40,7 +42,12 @@ public class LibraryServiceTests {
 		boolean result = true;
 		
 		assertTrue("book is available", book.isAvailable());
-		assertEquals(target.checkoutBook(source, book), result);
+		try {
+			assertEquals(target.checkoutBook(source, book), result);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	@Test

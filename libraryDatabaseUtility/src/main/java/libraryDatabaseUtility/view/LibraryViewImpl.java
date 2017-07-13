@@ -156,10 +156,10 @@ public class LibraryViewImpl implements LibraryView {
 	
 	public void displayBookCheckoutMessage(boolean available) {
 		if(available) {
-			System.out.println("Book checkout successfully!");
+			System.out.println("\nBook checkout successfully!");
 		}
 		else {
-			System.out.println("Book cannot be checkout.");
+			System.out.println("Book could not be checkout!");
 		}
 	}
 }

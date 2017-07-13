@@ -163,7 +163,7 @@ public class App {
 			System.out.print("Enter book title: ");
 			String bTitle = input.nextLine();
 			libraryController.checkoutBook(bTitle, memberLname);
-						
+			break;
 		default:
 			System.out.println("\nInvalid choice");
 			break;
