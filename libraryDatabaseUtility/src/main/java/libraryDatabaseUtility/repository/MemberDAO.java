@@ -23,7 +23,7 @@ public interface MemberDAO {
 	
 	public List<Member> searchForMembers(DataSource source, String lastName) throws SQLException;
 	
-	public List<Member> getMembersWithLateFee(DataSource source);
+	public List<Member> getMembersWithLateFee(DataSource source) throws SQLException;
 	
 	public Member getMember(DataSource source, long id);
 }

@@ -252,4 +252,24 @@ public class LibraryControllerImpl implements LibraryController {
 		}
 	}
 
+	public void displayMembersWithLateFees() {
+		try {
+			List<Member> members = memberDao.getMembersWithLateFee(source);
+			view.displayMembers(members);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+	}
+
+	public void displayMembersWithoutFees() {
+		try {
+			List<Member> members = memberDao.getMembersWithoutFee(source);
+			view.displayMembers(members);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+	}
+
 }

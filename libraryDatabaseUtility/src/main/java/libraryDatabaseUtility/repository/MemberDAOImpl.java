@@ -24,6 +24,8 @@ public class MemberDAOImpl implements MemberDAO {
 	private static final String SELECT_ALL_MEMBERS_SQL = "select * from members";
 	private static final String SEARCH_MEMBER_SQL = "select * from members where lastName = ?";
 	private static final String UPDATE_FEES_COLUMN_SQL = "update members set fees = ? where ID = ?";
+	private static final String SELECT_MEMBER_WITH_FEES_SQL = "select * from members where fees > 0";
+	private static final String SELECT_MEMBER_WITHOUT_FEES_SQL = "select * from members where fees = 0";
 	
 	public MemberDAOImpl() {
 		
@@ -122,10 +124,31 @@ public class MemberDAOImpl implements MemberDAO {
 	/* (non-Javadoc)
 	 * @see libraryDatabaseUtility.repository.MemberDAO#getMembersWithLateFee(libraryDatabaseUtility.model.DataSource)
 	 */
-	public List<Member> getMembersWithLateFee(DataSource source) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Member> getMembersWithLateFee(DataSource source) throws SQLException {
+		ResultSet resultSet = null;
+		PreparedStatement statement = null;
+		Connection connection = source.getConnection();
+		List<Member> members = new ArrayList<Member>();
+		
+		statement = connection.prepareStatement(SELECT_MEMBER_WITH_FEES_SQL, 
+				ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+		
+		resultSet = statement.executeQuery();
+		
+		// to map result set to member object
+		while(resultSet.next()) {
+			Member member = new Member();
+			member.setMemberId(resultSet.getLong("ID"));
+			member.setFirstName(resultSet.getString("firstName"));
+			member.setLastName(resultSet.getString("lastName"));
+			member.setFees(resultSet.getLong("fees"));
+			members.add(member);
+		}
+		
+		return members;
 	}
+		
+
 
 	public Member getMember(DataSource source, long id) {
 		// TODO Auto-generated method stub
@@ -144,5 +167,30 @@ public class MemberDAOImpl implements MemberDAO {
 		result = statement.executeUpdate();
 		
 		return result;
+	}
+
+
+	public List<Member> getMembersWithoutFee(DataSource source) throws SQLException {
+		ResultSet resultSet = null;
+		PreparedStatement statement = null;
+		Connection connection = source.getConnection();
+		List<Member> members = new ArrayList<Member>();
+		
+		statement = connection.prepareStatement(SELECT_MEMBER_WITHOUT_FEES_SQL, 
+				ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+		
+		resultSet = statement.executeQuery();
+		
+		// to map result set to member object
+		while(resultSet.next()) {
+			Member member = new Member();
+			member.setMemberId(resultSet.getLong("ID"));
+			member.setFirstName(resultSet.getString("firstName"));
+			member.setLastName(resultSet.getString("lastName"));
+			member.setFees(resultSet.getLong("fees"));
+			members.add(member);
+		}
+		
+		return members;
 	}
 }
