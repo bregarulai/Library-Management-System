@@ -89,8 +89,8 @@ public class LibraryViewImpl implements LibraryView {
 		System.out.println("[2] Display All Books\t\t\t[8] Display All Member\t\t\t[14] Display Visitors for a Date");
 		System.out.println("[3] Delete a Book\t\t\t[9] Delete a Member\t\t\t[15] Checkout Book");
 		System.out.println("[4] Search a Book\t\t\t[10] Search a Member\t\t\t[16] Return Book");
-		System.out.println("[5] Display checkout Books\t\t[11] Dislay Member with Late Fees\t[17] Quit");
-		System.out.println("[6] Display available Books\t\t[12] Display Member with no Fees");
+		System.out.println("[5] Display checkout Books\t\t[11] Dislay Member with Late Fees\t[17] Sign Out Visitor");
+		System.out.println("[6] Display available Books\t\t[12] Display Member with no Fees\t[18] Quit");
 		
 	}
 

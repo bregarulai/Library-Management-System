@@ -32,6 +32,6 @@ public interface LibraryController {
 	
 	public void registerVisitor(String firstName, String lastName);
 	
-	public void signoutVisitor(long visitorId);
+	public void signoutVisitor(String lastName);
 
 }

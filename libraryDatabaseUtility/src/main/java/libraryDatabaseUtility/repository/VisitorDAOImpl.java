@@ -18,9 +18,11 @@ import libraryDatabaseUtility.model.Visitor;
  *
  */
 public class VisitorDAOImpl implements VisitorDAO {
-	private static final String INSERT_VISITOR_SQL = "insert into visitors (firstName, lastName) values (?, ?)";
+	private static final String INSERT_VISITOR_SQL = "insert into visitors (firstName, lastName, dateOfvisit, timeIn) values (?, ?, ?, ?)";
 	private static final String SEARCH_VISITOR_SQL = "select * from visitors where lastName = ?";
 	private static final String SEARCH_VISITOR_BY_DATE_SQL = "select * from visitors where date(dateOfVisit) = ?";
+	private static final String UPDATE_VISITOR_TIME_OUT_SQL = "update visitors set timeOut = ? where ID = ?";
+	
 	
 	public VisitorDAOImpl() {
 		
@@ -34,9 +36,17 @@ public class VisitorDAOImpl implements VisitorDAO {
 		PreparedStatement statement = null;
 		Connection connection = source.getConnection();
 		
+		java.util.Date today = new java.util.Date();
+		java.sql.Time time = new java.sql.Time(today.getTime());
+		java.sql.Date date = new java.sql.Date(today.getTime());
+		member.setTimeIn(time);
+		member.setDateOfvisit(date);
+		
 		statement = connection.prepareStatement(INSERT_VISITOR_SQL);
 		statement.setString(1, member.getFirstName());
 		statement.setString(2, member.getLastName());
+		statement.setDate(3, member.getDateOfvisit());
+		statement.setTime(4, member.getTimeIn());
 		
 		result = statement.executeUpdate();
 		
@@ -63,6 +73,9 @@ public class VisitorDAOImpl implements VisitorDAO {
 			visitor.setVisitorId(resultSet.getLong("ID"));
 			visitor.setFirstName(resultSet.getString("firstName"));
 			visitor.setLastName(resultSet.getString("lastName"));
+			visitor.setDateOfvisit(resultSet.getDate("dateOfVisit"));
+			visitor.setTimeIn(resultSet.getTime("timeIn"));
+			visitor.setTimeout(resultSet.getTime("timeOut"));
 			visitors.add(visitor);
 		}
 			
@@ -96,6 +109,31 @@ public class VisitorDAOImpl implements VisitorDAO {
 		}
 				
 		return visitors;
+	}
+	
+	public int updateVisitorTimeOutColumn(DataSource source, Visitor visitor) throws SQLException {
+		int result = 0;
+		Connection connection = source.getConnection();
+		PreparedStatement statement = null;
+		
+		java.util.Date today = new java.util.Date();
+		java.sql.Time time = new java.sql.Time(today.getTime());
+		visitor.setTimeout(time);
+		
+		statement = connection.prepareStatement(UPDATE_VISITOR_TIME_OUT_SQL);
+		statement.setTime(1, visitor.getTimeout());
+		statement.setLong(2, visitor.getVisitorId());
+		
+		result = statement.executeUpdate();
+		
+		if(result == 1) {
+			System.out.println("Visitor Time Out updated successfully!");
+		}
+		else {
+			System.out.println("Error while updating visitor's time out!");
+		}
+		
+		return result;
 	}
 
 }

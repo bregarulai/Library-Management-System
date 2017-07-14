@@ -188,8 +188,14 @@ public class LibraryControllerImpl implements LibraryController {
 	/* (non-Javadoc)
 	 * @see libraryDatabaseUtility.controller.LibraryController#signoutVisitor(long)
 	 */
-	public void signoutVisitor(long visitorId) {
-		// TODO Auto-generated method stub
+	public void signoutVisitor(String lastName) {
+		try {
+			List<Visitor> visitors = visitorDao.searchForVisitor(source, lastName);
+			Visitor visitor = visitors.get(0);
+			visitorDao.updateVisitorTimeOutColumn(source, visitor);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 
 	}
 	
@@ -231,7 +237,7 @@ public class LibraryControllerImpl implements LibraryController {
 	public void displayCheckoutBooks() {
 		try {
 			List<Book> books = bookDao.getCheckoutBooks(source);
-			view.displayCheckoutBooks(books);
+			view.displayBooks(books);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

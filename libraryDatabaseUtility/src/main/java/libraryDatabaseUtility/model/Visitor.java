@@ -3,7 +3,8 @@
  */
 package libraryDatabaseUtility.model;
 
-import java.util.Date;
+import java.sql.Date;
+import java.sql.Time;
 
 /**
  * @author Flavio Luis
@@ -14,8 +15,8 @@ public class Visitor {
 	private String firstName;
 	private String lastName;
 	private Date dateOfvisit;
-	private Date timeIn;
-	private Date timeout;
+	private Time timeIn;
+	private Time timeout;
 	
 	public Visitor() {
 		
@@ -27,7 +28,7 @@ public class Visitor {
 	 * @param dateOfvisit
 	 * @param timeIn
 	 */
-	public Visitor(String firstName, String lastName, Date dateOfvisit, Date timeIn) {
+	public Visitor(String firstName, String lastName, Date dateOfvisit, Time timeIn) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -94,29 +95,29 @@ public class Visitor {
 	/**
 	 * @return the timeIn
 	 */
-	public Date getTimeIn() {
+	public Time getTimeIn() {
 		return timeIn;
 	}
 
 	/**
-	 * @param timeIn the timeIn to set
+	 * @param time the timeIn to set
 	 */
-	public void setTimeIn(Date timeIn) {
-		this.timeIn = timeIn;
+	public void setTimeIn(Time time) {
+		this.timeIn = time;
 	}
 
 	/**
 	 * @return the timeout
 	 */
-	public Date getTimeout() {
+	public Time getTimeout() {
 		return timeout;
 	}
 
 	/**
-	 * @param timeout the timeout to set
+	 * @param time the timeout to set
 	 */
-	public void setTimeout(Date timeout) {
-		this.timeout = timeout;
+	public void setTimeout(Time time) {
+		this.timeout = time;
 	}
 
 	/* (non-Javadoc)

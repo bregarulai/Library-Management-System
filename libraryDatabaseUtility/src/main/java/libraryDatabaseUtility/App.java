@@ -13,7 +13,7 @@ import libraryDatabaseUtility.controller.LibraryControllerImpl;
  */
 public class App {
 	private static final int MAX_LOGIN_ATTEMPTS = 5;
-	private static final int QUIT_SENTINEL = 17;
+	private static final int QUIT_SENTINEL = 18;
 
 	public static void main(String[] args) {
 		
@@ -72,7 +72,12 @@ public class App {
 			String title = input.nextLine();
 			System.out.print("Enter book author: ");
 			String author = input.nextLine();
-			libraryController.addBook(title, author);
+			if(isStringNull(title) || isStringNull(author)) {
+				System.out.println("\nInvalid input");			
+			}
+			else {
+				libraryController.addBook(title, author);
+			}
 			break;
 		
 		// menu option to display all books from the database
@@ -91,7 +96,13 @@ public class App {
 		case 4:
 			System.out.print("\nEnter book's title: ");
 			String bookTitle = input.nextLine();
-			libraryController.searchBook(bookTitle);
+			
+			if(isStringNull(bookTitle)) {
+				System.out.println("\nInvalid input");			
+			}
+			else {			
+				libraryController.searchBook(bookTitle);
+			}
 			break;
 			
 		// menu option to display checkout books
@@ -110,7 +121,13 @@ public class App {
 			String firstName = input.nextLine();
 			System.out.print("Enter last name: ");
 			String lastName = input.nextLine();
-			libraryController.addMember(firstName, lastName);
+			
+			if(isStringNull(firstName) || isStringNull(lastName)) {
+				System.out.println("\nInvalid input");			
+			}
+			else {
+				libraryController.addMember(firstName, lastName);
+			}
 			break;
 			
 		// menu option to display all members in database
@@ -129,7 +146,13 @@ public class App {
 		case 10:
 			System.out.print("\nEnter member's last name: ");
 			String memberLastName = input.nextLine();
-			libraryController.searchMember(memberLastName);
+			
+			if(isStringNull(memberLastName)) {
+				System.out.println("\nInvalid input");			
+			}
+			else {
+				libraryController.searchMember(memberLastName);
+			}
 			break;
 			
 		// menu option to display members with late fees
@@ -148,7 +171,13 @@ public class App {
 			String visitorFirstName = input.nextLine();
 			System.out.print("Enter last name");
 			String visitorLastName = input.nextLine();
-			libraryController.registerVisitor(visitorFirstName, visitorLastName);
+			
+			if(isStringNull(visitorFirstName) || isStringNull(visitorLastName)) {
+				System.out.println("\nInvalid input");			
+			}
+			else {
+				libraryController.registerVisitor(visitorFirstName, visitorLastName);
+			}
 			break;
 			
 		// menu option to display visitors for a date
@@ -164,7 +193,13 @@ public class App {
 			String memberLname = input.nextLine();
 			System.out.print("Enter book title: ");
 			String bTitle = input.nextLine();
-			libraryController.checkoutBook(bTitle, memberLname);
+			
+			if(isStringNull(memberLname) || isStringNull(bTitle)) {
+				System.out.println("\nInvalid input");			
+			}
+			else {
+				libraryController.checkoutBook(bTitle, memberLname);
+			}
 			break;
 			
 		// menu option to return a book
@@ -173,7 +208,26 @@ public class App {
 			String memLastName = input.nextLine();
 			System.out.print("Enter book title: ");
 			String bookTitle2 = input.nextLine();
-			libraryController.returnBook(bookTitle2, memLastName);
+			
+			if(isStringNull(memLastName) || isStringNull(bookTitle2)) {
+				System.out.println("\nInvalid input");			
+			}
+			else {
+				libraryController.returnBook(bookTitle2, memLastName);
+			}
+			break;
+			
+		// menu option to sign out a visitors
+		case 17:
+			System.out.println("\nEnter visitor's last name: ");
+			String visitorLName = input.nextLine();
+			
+			if(isStringNull(visitorLName)) {
+				System.out.println("\nInvalid input");			
+			}
+			else {
+				libraryController.signoutVisitor(visitorLName);
+			}
 			break;
 			
 		default:
@@ -182,6 +236,15 @@ public class App {
 			
 		}
 		
+	}
+	
+	private static boolean isStringNull(String value) {
+		boolean flag = false;
+		if(value != "") {
+			flag = true;
+		}
+		
+		return flag;
 	}
 
 }
