@@ -17,6 +17,7 @@ public class Visitor {
 	private Date dateOfvisit;
 	private Time timeIn;
 	private Time timeout;
+	private int timeSpend;
 	
 	public Visitor() {
 		
@@ -35,7 +36,7 @@ public class Visitor {
 		this.dateOfvisit = dateOfvisit;
 		this.timeIn = timeIn;
 	}
-
+	
 	/**
 	 * @return the visitorId
 	 */
@@ -118,6 +119,20 @@ public class Visitor {
 	 */
 	public void setTimeout(Time time) {
 		this.timeout = time;
+	}
+
+	/**
+	 * @return the timeSpend
+	 */
+	public int getTimeSpend() {
+		return timeSpend;
+	}
+
+	/**
+	 * @param timeSpend the timeSpend to set
+	 */
+	public void setTimeSpend(int timeSpend) {
+		this.timeSpend = timeSpend;
 	}
 
 	/* (non-Javadoc)
