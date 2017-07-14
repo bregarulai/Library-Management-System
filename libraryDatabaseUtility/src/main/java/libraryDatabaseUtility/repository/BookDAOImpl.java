@@ -74,6 +74,7 @@ public class BookDAOImpl implements BookDAO {
 			book.setBookTitle(resultSet.getString("title"));
 			book.setBookAuthor(resultSet.getString("author"));
 			book.setAvailable(resultSet.getBoolean("available"));
+			book.setCheckoutDate(resultSet.getDate("checkout"));
 			book.setReturnedDate(resultSet.getDate("returned"));
 			book.setMemberId(resultSet.getLong("memberId"));
 			books.add(book);

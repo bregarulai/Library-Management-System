@@ -101,16 +101,10 @@ public class LibraryViewImpl implements LibraryView {
 		String format = "%-15s%-30s%-25s%-20s%-20s%-20s%-20s\n";
 		System.out.format(format, "\nBook Id", " Book Title", " Book Author", " Available", " Checkout Date", " Returned Date", " Member Id");
 		System.out.format(format, "========", "==========", "===========", "=========", "===========", "===========", "===========");
-		/*String returnedDate = "0000-00-00";
-		String checkoutDate = "0000-00-00";*/
+		
 		
 		for(Book book : books) {
-			/*if(book.getReturnedDate() != null) {
-				returnedDate = book.getReturnedDate().toString();
-			}
-			if(book.getCheckoutDate() != null) {
-				checkoutDate = book.getCheckoutDate().toString();
-			}*/
+			
 			System.out.format(format, book.getBookId(), book.getBookTitle(),
 					book.getBookAuthor(), book.isAvailable(), book.getCheckoutDate(), 
 					book.getReturnedDate(), book.getMemberId());
@@ -135,7 +129,7 @@ public class LibraryViewImpl implements LibraryView {
 	 */
 	public void displayMembers(List<Member> members) {
 		String format = "%-20s%-25s%-25s%-25s\n";
-		System.out.format(format, "\nMember Id", "First Name", "Last Name", "Fees");
+		System.out.format(format, "\nMember Id", " First Name", " Last Name", " Fees");
 		System.out.format(format, "==========", "============", "===========", "=========");
 		
 		for(Member member : members) {

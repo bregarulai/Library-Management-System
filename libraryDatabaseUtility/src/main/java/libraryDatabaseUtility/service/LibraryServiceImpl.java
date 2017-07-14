@@ -48,9 +48,11 @@ public class LibraryServiceImpl implements LibraryService {
 		if(book.isAvailable()) {
 			book.setAvailable(false);
 			book.setCheckoutDate(sqlDate);
+			book.setReturnedDate(null);
 			checkoutDateUpdate = bookDao.updateBookCheckoutDate(source, book);
 			availableUpdate = bookDao.updateBookAvailableColumn(source, book);
 			memberIdUpdate = bookDao.updateBookMemberIdColumn(source, book.getBookId(), member.getMemberId());
+			bookDao.updateBookReturnedDate(source, book);
 			if(availableUpdate == 1 && memberIdUpdate == 1 && checkoutDateUpdate == 1) {
 				flag = true;
 			}
@@ -72,7 +74,7 @@ public class LibraryServiceImpl implements LibraryService {
 		List<Member> members = memberDao.searchForMembers(source, lastName);
 		
 		Calendar calendar = Calendar.getInstance();
-		calendar.add(Calendar.DATE, 8);
+		calendar.add(Calendar.DATE, 0);
 		java.sql.Date sqlDate = new java.sql.Date(calendar.getTime().getTime());
 		
 		Member member = members.get(0);
