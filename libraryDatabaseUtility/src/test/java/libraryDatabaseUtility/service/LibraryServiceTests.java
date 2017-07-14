@@ -38,12 +38,12 @@ public class LibraryServiceTests {
 
 	@Test
 	public void testCheckoutBookSuccessfully() {
-
+		String lastName = "valera";
 		boolean result = true;
 		
 		assertTrue("book is available", book.isAvailable());
 		try {
-			assertEquals(target.checkoutBook(source, book), result);
+			assertEquals(target.checkoutBook(source, book, lastName), result);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

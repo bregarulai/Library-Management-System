@@ -24,7 +24,7 @@ public class LibraryServiceImpl implements LibraryService {
 	private BookDAOImpl bookDao = new BookDAOImpl();
 	private MemberDAOImpl memberDao = new MemberDAOImpl();
 	private static double FEES_RATE = 5;
-	private static int MAX_CHECKOUT_DAYS = 10;
+	private static int MAX_CHECKOUT_DAYS = 5;
 	
 	
 	/* (non-Javadoc)
@@ -72,7 +72,7 @@ public class LibraryServiceImpl implements LibraryService {
 		List<Member> members = memberDao.searchForMembers(source, lastName);
 		
 		Calendar calendar = Calendar.getInstance();
-		calendar.add(Calendar.DATE, 0);
+		calendar.add(Calendar.DATE, 8);
 		java.sql.Date sqlDate = new java.sql.Date(calendar.getTime().getTime());
 		
 		Member member = members.get(0);
@@ -87,20 +87,22 @@ public class LibraryServiceImpl implements LibraryService {
 			if(availableUpdate == 1 && memberIdUpdate == 1 && returnedDateUpdate == 1) {
 				flag = true;
 			}
+			
+			double fees = calculateFees(book);
+			member.setFees(fees);
+			int updateFees = memberDao.updateMemberFees(source, member);
+			if(updateFees == 1) {
+				System.out.println("\nMember fees updated Successfully!");
+			}
+			else {
+				System.out.println("\nError while updating member fees!");
+			}
 		}
 		else {
 			System.out.println("\nMember does not exist");
 		}
 		
-		double fees = calculateFees(book);
-		member.setFees(fees);
-		int updateFees = memberDao.updateMemberFees(source, member);
-		if(updateFees == 1) {
-			System.out.println("\nMember fees updated Successfully!");
-		}
-		else {
-			System.out.println("\nError while updating member fees!");
-		}
+		
 		
 		return flag;
 	}
