@@ -15,7 +15,7 @@ import libraryDatabaseUtility.model.DataSource;
  */
 public interface LibraryService {
 
-	public boolean checkoutBook(DataSource source, Book book) throws SQLException;
+	public boolean checkoutBook(DataSource source, Book book, String lastName) throws SQLException;
 	
 	public boolean returnBook(DataSource source, Book book, String lastName) throws SQLException;
 }

@@ -159,8 +159,4 @@ public class LibraryServiceImpl implements LibraryService {
 		return fees;		
 	}
 
-	public boolean checkoutBook(DataSource source, Book book) throws SQLException {
-		// TODO Auto-generated method stub
-		return false;
-	}
 }
