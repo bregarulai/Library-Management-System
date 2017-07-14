@@ -206,6 +206,18 @@ public class LibraryControllerImpl implements LibraryController {
 			
 	}
 	
+	public void returnBook(String bookTitle, String lastName) {
+		boolean returned;
+		try {
+			List<Book> books = bookDao.searchForBooks(source, bookTitle);
+			Book book = books.get(0);
+			returned = libraryService.returnBook(source, book, lastName);
+			view.displayBookReturnedMessage(returned);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	public void getVisitorForDate(String date) {
 		try {
 			List<Visitor> visitors = visitorDao.getVisitorsForThisDate(source, date);

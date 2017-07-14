@@ -97,7 +97,7 @@ public class Member {
 	/**
 	 * @param fees the fees to set
 	 */
-	public void setFees(long fees) {
+	public void setFees(double fees) {
 		this.fees = fees;
 	}
 

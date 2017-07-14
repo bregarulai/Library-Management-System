@@ -23,6 +23,7 @@ public class MemberDAOImpl implements MemberDAO {
 	private static final String DELETE_RECORD_SQL = "delete from members where ID = ?";
 	private static final String SELECT_ALL_MEMBERS_SQL = "select * from members";
 	private static final String SEARCH_MEMBER_SQL = "select * from members where lastName = ?";
+	private static final String UPDATE_FEES_COLUMN_SQL = "update members set fees = ? where ID = ?";
 	
 	public MemberDAOImpl() {
 		
@@ -83,7 +84,7 @@ public class MemberDAOImpl implements MemberDAO {
 			member.setMemberId(resultSet.getLong("ID"));
 			member.setFirstName(resultSet.getString("firstName"));
 			member.setLastName(resultSet.getString("lastName"));
-			
+			member.setFees(resultSet.getLong("fees"));
 			members.add(member);
 		}
 		
@@ -111,6 +112,7 @@ public class MemberDAOImpl implements MemberDAO {
 			member.setMemberId(resultSet.getLong("ID"));
 			member.setFirstName(resultSet.getString("firstName"));
 			member.setLastName(resultSet.getString("lastName"));
+			member.setFees(resultSet.getLong("fees"));
 			members.add(member);
 		}
 		
@@ -130,4 +132,17 @@ public class MemberDAOImpl implements MemberDAO {
 		return null;
 	}
 
+	public int updateMemberFees(DataSource source, Member member) throws SQLException {
+		int result = 0;
+		Connection connection = source.getConnection();
+		PreparedStatement statement = null;
+		
+		statement = connection.prepareStatement(UPDATE_FEES_COLUMN_SQL);
+		statement.setDouble(1, member.getFees());
+		statement.setLong(2, member.getMemberId());
+		
+		result = statement.executeUpdate();
+		
+		return result;
+	}
 }

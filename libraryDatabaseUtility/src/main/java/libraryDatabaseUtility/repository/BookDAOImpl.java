@@ -28,6 +28,9 @@ public class BookDAOImpl implements BookDAO {
 	private static final String GET_BOOK_SQL = "select * from books where ID = ?";
 	private static final String GET_CHECKOUT_BOOKS_SQL = "select * from books where available = false";
 	private static final String GET_AVAILABLE_BOOKS_SQL = "select * from books where available = true";
+	private static final String UPDATE_CHECKOUT_DATE_COL_SQL ="update books set checkout = ? where ID = ?";
+	private static final String UPDATE_MEMBER_ID_TO_NULL_SQL = "update books set memberId = null where ID = ?";
+	private static final String UPDATE_RETURNED_DATE_SQL = "update books set returned = ? where ID = ?";
 	
 	// no arg constructor
 	public BookDAOImpl() {
@@ -71,6 +74,8 @@ public class BookDAOImpl implements BookDAO {
 			book.setBookTitle(resultSet.getString("title"));
 			book.setBookAuthor(resultSet.getString("author"));
 			book.setAvailable(resultSet.getBoolean("available"));
+			book.setReturnedDate(resultSet.getDate("returned"));
+			book.setMemberId(resultSet.getLong("memberId"));
 			books.add(book);
 		}
 		
@@ -112,6 +117,9 @@ public class BookDAOImpl implements BookDAO {
 			book.setBookTitle(resultSet.getString("title"));
 			book.setBookAuthor(resultSet.getString("author"));
 			book.setAvailable(resultSet.getBoolean("available"));
+			book.setCheckoutDate(resultSet.getDate("checkout"));
+			book.setReturnedDate(resultSet.getDate("returned"));
+			book.setMemberId(resultSet.getLong("memberId"));
 			books.add(book);
 		}
 		
@@ -216,6 +224,46 @@ public class BookDAOImpl implements BookDAO {
 		result = statement.executeUpdate();
 		
 		return result;
-	}	
+	}
+
+	public int updateBookCheckoutDate(DataSource source, Book book) throws SQLException {
+		int result = 0;
+		Connection connection = source.getConnection();
+		PreparedStatement statement = null;
+		
+		statement = connection.prepareStatement(UPDATE_CHECKOUT_DATE_COL_SQL);
+		statement.setDate(1, book.getCheckoutDate());
+		statement.setLong(2, book.getBookId());
+		
+		result = statement.executeUpdate();
+		
+		return result;
+	}
 	
+	public int updateBookReturnedDate(DataSource source, Book book) throws SQLException {
+		int result = 0;
+		Connection connection = source.getConnection();
+		PreparedStatement statement = null;
+		
+		statement = connection.prepareStatement(UPDATE_RETURNED_DATE_SQL);
+		statement.setDate(1, book.getReturnedDate());
+		statement.setLong(2, book.getBookId());
+		
+		result = statement.executeUpdate();
+		
+		return result;
+	}
+	
+	public int updateBookMemberIdColumnToNull(DataSource source, Book book) throws SQLException {
+		int result = 0;
+		Connection connection = source.getConnection();
+		PreparedStatement statement = null;
+		
+		statement = connection.prepareStatement(UPDATE_MEMBER_ID_TO_NULL_SQL);
+		statement.setLong(1, book.getBookId());
+		
+		result = statement.executeUpdate();
+		
+		return result;
+	}
 }

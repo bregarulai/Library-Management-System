@@ -109,10 +109,10 @@ public class Book {
 
 
 	/**
-	 * @param checkoutDate the checkoutDate to set
+	 * @param date the checkoutDate to set
 	 */
-	public void setCheckoutDate(Date checkoutDate) {
-		this.checkoutDate = checkoutDate;
+	public void setCheckoutDate(Date date) {
+		this.checkoutDate = date;
 	}
 
 
@@ -125,10 +125,10 @@ public class Book {
 
 
 	/**
-	 * @param returnedDate the returnedDate to set
+	 * @param date the returnedDate to set
 	 */
-	public void setReturnedDate(Date returnedDate) {
-		this.returnedDate = returnedDate;
+	public void setReturnedDate(Date date) {
+		this.returnedDate = date;
 	}
 
 

@@ -166,6 +166,16 @@ public class App {
 			String bTitle = input.nextLine();
 			libraryController.checkoutBook(bTitle, memberLname);
 			break;
+			
+		// menu option to return a book
+		case 16:
+			System.out.print("\nEnter member last name: ");
+			String memLastName = input.nextLine();
+			System.out.print("Enter book title: ");
+			String bookTitle2 = input.nextLine();
+			libraryController.returnBook(bookTitle2, memLastName);
+			break;
+			
 		default:
 			System.out.println("\nInvalid choice");
 			break;

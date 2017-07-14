@@ -81,9 +81,15 @@ public class LibraryServiceTests {
 	@Test 
 	public void testReturnBookSuccessfully() {
 		boolean result = true;
+		String lastName = "valera";
 		
 		assertFalse("book is not available", book.isAvailable());
-		assertEquals(target.returnBook(source, book), result);
+		try {
+			assertEquals(target.returnBook(source, book, lastName), result);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	@Test

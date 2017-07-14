@@ -98,13 +98,22 @@ public class LibraryViewImpl implements LibraryView {
 	 * @see libraryDatabaseUtility.view.LibraryView#displayBooks(java.util.List)
 	 */
 	public void displayBooks(List<Book> books) {
-		String format = "%-15s%-30s%-25s%-4s\n";
-		System.out.format(format, "\nBook Id", " Book Title", " Book Author", " Available");
-		System.out.format(format, "========", "==========", "===========", "=========");
+		String format = "%-15s%-30s%-25s%-20s%-20s%-20s%-20s\n";
+		System.out.format(format, "\nBook Id", " Book Title", " Book Author", " Available", " Checkout Date", " Returned Date", " Member Id");
+		System.out.format(format, "========", "==========", "===========", "=========", "===========", "===========", "===========");
+		/*String returnedDate = "0000-00-00";
+		String checkoutDate = "0000-00-00";*/
 		
 		for(Book book : books) {
+			/*if(book.getReturnedDate() != null) {
+				returnedDate = book.getReturnedDate().toString();
+			}
+			if(book.getCheckoutDate() != null) {
+				checkoutDate = book.getCheckoutDate().toString();
+			}*/
 			System.out.format(format, book.getBookId(), book.getBookTitle(),
-					book.getBookAuthor(), book.isAvailable());
+					book.getBookAuthor(), book.isAvailable(), book.getCheckoutDate(), 
+					book.getReturnedDate(), book.getMemberId());
 		}
 
 	}
@@ -174,12 +183,23 @@ public class LibraryViewImpl implements LibraryView {
 		
 	}
 	
+	// method to output checkout message to user
 	public void displayBookCheckoutMessage(boolean available) {
 		if(available) {
 			System.out.println("\nBook checkout successfully!");
 		}
 		else {
 			System.out.println("Book could not be checkout!");
+		}
+	}
+	
+	// method to output return message to user
+	public void displayBookReturnedMessage(boolean available) {
+		if(available) {
+			System.out.println("\nBook returned successfully!");
+		}
+		else {
+			System.out.println("Book could not be returned!");
 		}
 	}
 }
