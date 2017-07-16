@@ -3,7 +3,6 @@
  */
 package libraryDatabaseUtility;
 
-import java.awt.datatransfer.StringSelection;
 import java.util.Scanner;
 
 import libraryDatabaseUtility.controller.LibraryControllerImpl;
