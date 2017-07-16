@@ -256,14 +256,5 @@ public class App {
 		
 	}
 	
-	@SuppressWarnings("null")
-	private static boolean isStringNull(String value) {
-		boolean flag = false;
-		if(value == null && value.isEmpty()) {
-			flag = true;
-		}
-		
-		return flag;
-	}
 
 }
