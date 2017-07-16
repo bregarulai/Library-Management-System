@@ -119,7 +119,7 @@ public class LibraryViewImpl implements LibraryView {
 		
 		for(Book book : books) {
 			System.out.format(format, book.getBookId(), book.getBookTitle(),
-					book.getBookAuthor(), book.isAvailable(), book.getCheckoutDate().toString());
+					book.getBookAuthor(), book.isAvailable(), book.getCheckoutDate());
 		}
 		
 	}
@@ -165,14 +165,14 @@ public class LibraryViewImpl implements LibraryView {
 	}
 
 	public void displayVisitors(List<Visitor> visitors) {
-		String format = "%-20s%-25s%-25s%-25s%-25s%-25s\n";
-		System.out.format(format, "\nVisitor Id", " First Name", " Last Name", " Date of Visit", " Time In", " Time Out");
-		System.out.format(format, "==========", "============", "===========", "=============", "=========", "=========");
+		String format = "%-20s%-20s%-20s%-20s%-20s%-20s%-20s\n";
+		System.out.format(format, "\nVisitor Id", " First Name", " Last Name", " Date of Visit", " Time In", " Time Out", " Time Spended");
+		System.out.format(format, "==========", "============", "===========", "=============", "=========", "=========", "============");
 		
 		for(Visitor visitor : visitors) {
 			System.out.format(format, visitor.getVisitorId(), visitor.getFirstName(),
 					visitor.getLastName(), visitor.getDateOfvisit().toString(), 
-					visitor.getTimeIn().toString(), visitor.getTimeout().toString());
+					visitor.getTimeIn(), visitor.getTimeout(), visitor.getTimeSpend());
 		}
 		
 	}

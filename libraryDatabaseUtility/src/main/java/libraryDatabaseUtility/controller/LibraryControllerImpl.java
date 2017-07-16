@@ -193,6 +193,7 @@ public class LibraryControllerImpl implements LibraryController {
 			List<Visitor> visitors = visitorDao.searchForVisitor(source, lastName);
 			Visitor visitor = visitors.get(0);
 			visitorDao.updateVisitorTimeOutColumn(source, visitor);
+			visitorDao.updateVisitorTimeSpendedColumn(source, visitor);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

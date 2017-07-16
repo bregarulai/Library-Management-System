@@ -7,6 +7,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,6 +23,7 @@ public class VisitorDAOImpl implements VisitorDAO {
 	private static final String SEARCH_VISITOR_SQL = "select * from visitors where lastName = ?";
 	private static final String SEARCH_VISITOR_BY_DATE_SQL = "select * from visitors where date(dateOfVisit) = ?";
 	private static final String UPDATE_VISITOR_TIME_OUT_SQL = "update visitors set timeOut = ? where ID = ?";
+	private static final String UPDATE_VISITOR_TIME_SPENDED_SQL = "update visitors set timeSpended = ? where ID = ?";
 	
 	
 	public VisitorDAOImpl() {
@@ -105,6 +107,7 @@ public class VisitorDAOImpl implements VisitorDAO {
 			visitor.setDateOfvisit(resultSet.getDate("dateOfVisit"));
 			visitor.setTimeIn(resultSet.getTime("timeIn"));
 			visitor.setTimeout(resultSet.getTime("timeOut"));
+			visitor.setTimeSpend(resultSet.getTime("timeSpended"));
 			visitors.add(visitor);
 		}
 				
@@ -135,5 +138,39 @@ public class VisitorDAOImpl implements VisitorDAO {
 		
 		return result;
 	}
-
+	
+	public int updateVisitorTimeSpendedColumn(DataSource source, Visitor visitor) throws SQLException {
+		int result = 0;
+		Connection connection = source.getConnection();
+		PreparedStatement statement = null;
+		
+		
+		
+		visitor.setTimeSpend(differenceBetweenTimes(visitor.getTimeIn(), visitor.getTimeout()));
+		
+		statement = connection.prepareStatement(UPDATE_VISITOR_TIME_SPENDED_SQL);
+		statement.setTime(1, visitor.getTimeSpend());
+		statement.setLong(2, visitor.getVisitorId());
+		
+		result = statement.executeUpdate();
+		
+		if(result == 1) {
+			System.out.println("Visitor Time spended updated successfully!");
+		}
+		else {
+			System.out.println("Error while updating visitor's time spended!");
+		}
+		
+		return result;
+	}
+	
+	private static Time differenceBetweenTimes(Time in, Time out) {
+		long result;
+		long inTime = in.getTime();
+		long outTime = out.getTime();
+		result = (outTime - inTime) / (1000 * 60);
+		java.sql.Time time = new java.sql.Time(result);
+		System.out.println(result);
+		return time;
+	}
 }

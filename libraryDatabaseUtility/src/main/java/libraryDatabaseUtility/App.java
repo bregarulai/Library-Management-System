@@ -3,6 +3,7 @@
  */
 package libraryDatabaseUtility;
 
+import java.awt.datatransfer.StringSelection;
 import java.util.Scanner;
 
 import libraryDatabaseUtility.controller.LibraryControllerImpl;
@@ -63,7 +64,7 @@ public class App {
 	}
 	
 	private static void processUserChoice(LibraryControllerImpl libraryController, Scanner input, int choice) {
-		
+		boolean isEmpty;
 		// To execute different menu choices
 		switch(choice) {
 		// menu option to add book to the database
@@ -72,10 +73,13 @@ public class App {
 			String title = input.nextLine();
 			System.out.print("Enter book author: ");
 			String author = input.nextLine();
-			if(isStringNull(title) || isStringNull(author)) {
-				System.out.println("\nInvalid input");			
+			
+			// to check for empty input
+			isEmpty = (title == null || title.trim().length() == 0) || (author == null || author.trim().length() == 0);
+			if(isEmpty) {
+				System.out.println("\nInvalid Input!");
 			}
-			else {
+			else {	
 				libraryController.addBook(title, author);
 			}
 			break;
@@ -97,10 +101,12 @@ public class App {
 			System.out.print("\nEnter book's title: ");
 			String bookTitle = input.nextLine();
 			
-			if(isStringNull(bookTitle)) {
-				System.out.println("\nInvalid input");			
+			// to check for empty input
+			isEmpty = bookTitle == null || bookTitle.trim().length() == 0;
+			if(isEmpty) {
+				System.out.println("\nInvalid Input!");
 			}
-			else {			
+			else {		
 				libraryController.searchBook(bookTitle);
 			}
 			break;
@@ -122,10 +128,12 @@ public class App {
 			System.out.print("Enter last name: ");
 			String lastName = input.nextLine();
 			
-			if(isStringNull(firstName) || isStringNull(lastName)) {
-				System.out.println("\nInvalid input");			
+			// to check for empty input
+			isEmpty = (firstName == null || firstName.trim().length() == 0) || (lastName == null || lastName.trim().length() == 0);
+			if(isEmpty) {
+				System.out.println("\nInvalid Input!");
 			}
-			else {
+			else {	
 				libraryController.addMember(firstName, lastName);
 			}
 			break;
@@ -147,10 +155,12 @@ public class App {
 			System.out.print("\nEnter member's last name: ");
 			String memberLastName = input.nextLine();
 			
-			if(isStringNull(memberLastName)) {
-				System.out.println("\nInvalid input");			
+			// to check for empty input
+			isEmpty = memberLastName == null || memberLastName.trim().length() == 0;
+			if(isEmpty) {
+				System.out.println("\nInvalid Input!");
 			}
-			else {
+			else {		
 				libraryController.searchMember(memberLastName);
 			}
 			break;
@@ -169,13 +179,15 @@ public class App {
 		case 13:
 			System.out.print("\nEnter first name: ");
 			String visitorFirstName = input.nextLine();
-			System.out.print("Enter last name");
+			System.out.print("Enter last name: ");
 			String visitorLastName = input.nextLine();
 			
-			if(isStringNull(visitorFirstName) || isStringNull(visitorLastName)) {
-				System.out.println("\nInvalid input");			
+			// to check for empty input
+			isEmpty = (visitorFirstName == null || visitorFirstName.trim().length() == 0) || (visitorLastName == null || visitorLastName.trim().length() == 0);
+			if(isEmpty) {
+				System.out.println("\nInvalid Input!");
 			}
-			else {
+			else {	
 				libraryController.registerVisitor(visitorFirstName, visitorLastName);
 			}
 			break;
@@ -194,10 +206,12 @@ public class App {
 			System.out.print("Enter book title: ");
 			String bTitle = input.nextLine();
 			
-			if(isStringNull(memberLname) || isStringNull(bTitle)) {
-				System.out.println("\nInvalid input");			
+			// to check for empty input
+			isEmpty = (memberLname == null || memberLname.trim().length() == 0) || (bTitle == null || bTitle.trim().length() == 0);
+			if(isEmpty) {
+				System.out.println("\nInvalid Input!");
 			}
-			else {
+			else {	
 				libraryController.checkoutBook(bTitle, memberLname);
 			}
 			break;
@@ -209,10 +223,12 @@ public class App {
 			System.out.print("Enter book title: ");
 			String bookTitle2 = input.nextLine();
 			
-			if(isStringNull(memLastName) || isStringNull(bookTitle2)) {
-				System.out.println("\nInvalid input");			
+			// to check for empty input
+			isEmpty = (memLastName == null || memLastName.trim().length() == 0) || (bookTitle2 == null || bookTitle2.trim().length() == 0);
+			if(isEmpty) {
+				System.out.println("\nInvalid Input!");
 			}
-			else {
+			else {	
 				libraryController.returnBook(bookTitle2, memLastName);
 			}
 			break;
@@ -222,8 +238,10 @@ public class App {
 			System.out.println("\nEnter visitor's last name: ");
 			String visitorLName = input.nextLine();
 			
-			if(isStringNull(visitorLName)) {
-				System.out.println("\nInvalid input");			
+			// to check for empty input
+			isEmpty = visitorLName == null || visitorLName.trim().length() == 0;
+			if(isEmpty) {
+				System.out.println("\nInvalid Input!");
 			}
 			else {
 				libraryController.signoutVisitor(visitorLName);
@@ -238,9 +256,10 @@ public class App {
 		
 	}
 	
+	@SuppressWarnings("null")
 	private static boolean isStringNull(String value) {
 		boolean flag = false;
-		if(value != "") {
+		if(value == null && value.isEmpty()) {
 			flag = true;
 		}
 		
