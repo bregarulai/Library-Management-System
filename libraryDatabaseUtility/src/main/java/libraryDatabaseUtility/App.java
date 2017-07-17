@@ -13,7 +13,7 @@ import libraryDatabaseUtility.controller.LibraryControllerImpl;
  */
 public class App {
 	private static final int MAX_LOGIN_ATTEMPTS = 5;
-	private static final int QUIT_SENTINEL = 18;
+	private static final int QUIT_SENTINEL = 19;
 
 	public static void main(String[] args) {
 		
@@ -247,6 +247,19 @@ public class App {
 			}
 			break;
 			
+		case 18:
+			System.out.println("\nEnter visitor's last name: ");
+			visitorLName = input.nextLine();
+			
+			// to check for empty input
+			isEmpty = visitorLName == null || visitorLName.trim().length() == 0;
+			if(isEmpty) {
+				System.out.println("\nInvalid Input!");
+			}
+			else {
+				libraryController.getTimeSpend(visitorLName);
+			}
+			break;
 		default:
 			System.out.println("\nInvalid choice");
 			break;

@@ -17,7 +17,7 @@ public class Visitor {
 	private Date dateOfvisit;
 	private Time timeIn;
 	private Time timeout;
-	private Time timeSpend;
+	private String timeSpend;
 	
 	public Visitor() {
 		
@@ -124,14 +124,14 @@ public class Visitor {
 	/**
 	 * @return the timeSpend
 	 */
-	public Time getTimeSpend() {
+	public String getTimeSpend() {
 		return timeSpend;
 	}
 
 	/**
 	 * @param time the timeSpend to set
 	 */
-	public void setTimeSpend(Time time) {
+	public void setTimeSpend(String time) {
 		this.timeSpend = time;
 	}
 

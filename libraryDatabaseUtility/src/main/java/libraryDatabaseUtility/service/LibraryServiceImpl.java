@@ -12,6 +12,7 @@ import java.util.List;
 import libraryDatabaseUtility.model.Book;
 import libraryDatabaseUtility.model.DataSource;
 import libraryDatabaseUtility.model.Member;
+import libraryDatabaseUtility.model.Visitor;
 import libraryDatabaseUtility.repository.BookDAOImpl;
 import libraryDatabaseUtility.repository.MemberDAOImpl;
 	
@@ -103,10 +104,20 @@ public class LibraryServiceImpl implements LibraryService {
 		else {
 			System.out.println("\nMember does not exist");
 		}
-		
-		
-		
+			
 		return flag;
+	}
+	
+	public String calculateTimeSpend(DataSource source, Visitor visitor) {
+		long milliseconds = visitor.getTimeout().getTime() - visitor.getTimeIn().getTime();
+		int seconds = (int) milliseconds / 1000;
+		
+		int hours = seconds / 3600;
+		int minutes = (seconds % 3600) / 60;
+		seconds = (seconds % 3600) % 60;
+		String time = hours + ":" + minutes + ":" + seconds;
+	
+		return time;
 	}
 
 	/**

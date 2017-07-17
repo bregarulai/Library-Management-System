@@ -193,7 +193,7 @@ public class LibraryControllerImpl implements LibraryController {
 			List<Visitor> visitors = visitorDao.searchForVisitor(source, lastName);
 			Visitor visitor = visitors.get(0);
 			visitorDao.updateVisitorTimeOutColumn(source, visitor);
-			visitorDao.updateVisitorTimeSpendedColumn(source, visitor);
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -271,6 +271,20 @@ public class LibraryControllerImpl implements LibraryController {
 			e.printStackTrace();
 		}
 		
+	}
+	
+	public void getTimeSpend(String lastName) {
+		try {
+			List<Visitor> visitors = visitorDao.searchForVisitor(source, lastName);
+			Visitor visitor = visitors.get(0);
+			String time = libraryService.calculateTimeSpend(source, visitor);
+			System.out.println("\nMember: " + visitor.getLastName() +
+					"\nSpended: " + time + " in the library.");
+			visitor.setTimeSpend(time);
+			visitorDao.updateVisitorTimeSpendedColumn(source, visitor);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 
 }
