@@ -6,6 +6,7 @@ import static org.junit.Assert.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.List;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -37,22 +38,22 @@ public class TestVisitorDAOImpl {
 	@AfterClass
 	public static void afterClass() {
 		
-			try {
-				if(statement != null) {
-					statement.close();
-				}
-				
-				if(connection != null) {
-					connection.close();
-				}
-			} catch (SQLException e) {
-				e.printStackTrace();
+		try {
+			if(statement != null) {
+				statement.close();
 			}
+			
+			if(connection != null) {
+				connection.close();
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 
 
 	@Before
-	public void setUp() throws Exception {
+	public void setUp() {
 		target = new VisitorDAOImpl();
 		source = DataSource.getInstance();
 		visitor = new Visitor();
@@ -77,7 +78,6 @@ public class TestVisitorDAOImpl {
 		try {
 			assertEquals(target.addVisitorToDb(source, visitor), result);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -85,13 +85,12 @@ public class TestVisitorDAOImpl {
 	
 	@Test
 	public void testSearchVisitorReturnsCorrectResult() {
-		visitor.setFirstName("Mike");
-		visitor.setLastName("Myers");
-		try {
+		try {		
 			target.addVisitorToDb(source, visitor);
-			assertEquals(target.searchForVisitor(source, visitor.getLastName()), visitor);
+			List<Visitor> visitors = target.searchForVisitor(source, visitor.getLastName());
+			Visitor visitor1 = visitors.get(0);
+			assertEquals(visitor1.getLastName(), visitor.getLastName());
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
