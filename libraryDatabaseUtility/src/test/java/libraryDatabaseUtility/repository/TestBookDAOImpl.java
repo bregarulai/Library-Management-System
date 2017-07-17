@@ -25,7 +25,6 @@ import libraryDatabaseUtility.model.DataSource;
  *
  */
 public class TestBookDAOImpl {
-	private final static long BOOK_ID = 1;
 	BookDAOImpl target;
 	Book book;
 	DataSource source;
@@ -52,7 +51,6 @@ public class TestBookDAOImpl {
 					connection.close();
 				}
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 	}
@@ -74,7 +72,6 @@ public class TestBookDAOImpl {
 			statement.setString(1, book.getBookTitle());
 			statement.setString(2, book.getBookAuthor());
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -87,7 +84,6 @@ public class TestBookDAOImpl {
 				connection.close();
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -96,12 +92,9 @@ public class TestBookDAOImpl {
 	@Test
 	public void testBookAddedToDatabase()  {
 		int result = 1;
-		//book.setBookTitle("Los Ladrones Lloran");
-		//book.setBookAuthor("Roberto Santos");
 		try {
 			assertEquals(target.addBookToDb(source, book), result);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -113,7 +106,6 @@ public class TestBookDAOImpl {
 		try {
 			books = target.getAllBooks(source);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		assertNotNull(books);
@@ -121,26 +113,35 @@ public class TestBookDAOImpl {
 	
 	@Test
 	public void testRecordGetsDeletedFromDatabase() {
-		int result = 1;
 		try {
-			assertEquals(target.deleteRecord(source, book.getBookId()), result);
+			target.addBookToDb(source, book);
+			target.deleteRecord(source, book.getBookId());
+			List<Book> books = target.searchForBooks(source, book.getBookTitle());
+			assertNotNull(books);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 
 	@Test
 	public void testSearchBookReturnsCorrectResult() throws SQLException {
-		//Book book1 = new Book(BOOK_ID, "To Kill a Mockingbird", "Harper Lee");
 		target.addBookToDb(source, book);
-		assertEquals(target.searchForBooks(source, book.getBookTitle()), book);
+		List<Book> books = target.searchForBooks(source, book.getBookTitle());
+		Book book1 = books.get(0);
+ 		assertEquals(book1.getBookTitle(), book.getBookTitle());
 	}
 	
 	@Test
 	public void testGetBookFromDatabase() {
-		//Book book1 = target.getBook(source, BOOK_ID);
-		assertNotNull(book);
-		assertTrue(book instanceof Book);
+		try {
+			target.addBookToDb(source, book);
+			String title = book.getBookTitle();
+			List<Book> books = target.searchForBooks(source, title);
+			Book book1 = books.get(0);
+			assertNotNull(book1);
+			assertTrue(book1 instanceof Book);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}	
 	}
 }
