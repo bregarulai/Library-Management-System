@@ -91,7 +91,8 @@ public class LibraryViewImpl implements LibraryView {
 		System.out.println("[4] Search a Book\t\t\t[10] Search a Member\t\t\t[16] Return Book");
 		System.out.println("[5] Display checkout Books\t\t[11] Dislay Member with Late Fees\t[17] Sign Out Visitor");
 		System.out.println("[6] Display available Books\t\t[12] Display Member with no Fees\t[18] Get Visitor's Time Spend");
-		System.out.println("\t\t\t\t\t\t\t\t\t\t[19] Quit");
+		System.out.println("\t\t\t\t\t\t\t\t\t\t[19] Pay Fees");
+		System.out.println("\t\t\t\t\t\t\t\t\t\t[20] Quit");
 		
 	}
 

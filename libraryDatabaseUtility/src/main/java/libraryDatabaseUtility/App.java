@@ -13,7 +13,7 @@ import libraryDatabaseUtility.controller.LibraryControllerImpl;
  */
 public class App {
 	private static final int MAX_LOGIN_ATTEMPTS = 5;
-	private static final int QUIT_SENTINEL = 19;
+	private static final int QUIT_SENTINEL = 20;
 
 	public static void main(String[] args) {
 		
@@ -246,7 +246,8 @@ public class App {
 				libraryController.signoutVisitor(visitorLName);
 			}
 			break;
-			
+		
+		// option to get time spend 
 		case 18:
 			System.out.println("\nEnter visitor's last name: ");
 			visitorLName = input.nextLine();
@@ -259,6 +260,23 @@ public class App {
 			else {
 				libraryController.getTimeSpend(visitorLName);
 			}
+			break;
+		// option to pay fees	
+		case 19:
+			System.out.print("\nEnter member last name: ");
+			memLastName = input.nextLine();
+			System.out.print("Enter amount: ");
+			double amount = input.nextDouble();
+			
+			// to check for empty input
+			isEmpty = (memLastName == null || memLastName.trim().length() == 0);
+			if(isEmpty) {
+				System.out.println("\nInvalid Input!");
+			}
+			else {	
+				libraryController.payFees(memLastName, amount);
+			}
+			
 			break;
 		default:
 			System.out.println("\nInvalid choice");

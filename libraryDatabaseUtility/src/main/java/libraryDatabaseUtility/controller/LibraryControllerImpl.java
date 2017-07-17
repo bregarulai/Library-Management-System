@@ -286,5 +286,25 @@ public class LibraryControllerImpl implements LibraryController {
 			e.printStackTrace();
 		}
 	}
+	
+	public void payFees(String lastName, double amount) {
+		try {
+			List<Member> members = memberDao.searchForMembers(source, lastName);
+			Member member = members.get(0);
+			double fees = member.getFees() - amount;
+			member.setFees(fees);
+			int result = memberDao.updateMemberFees(source, member);
+			
+			if(result == 1) {
+				System.out.println("\nMember fees updated Successfully!");
+			}
+			else {
+				System.out.println("\nError while updating member fees!");
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
 
 }
