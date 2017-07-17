@@ -6,12 +6,15 @@ package libraryDatabaseUtility.repository;
 import static org.junit.Assert.*;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.After;
+import org.junit.AfterClass;
 import org.junit.Before;
-
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import libraryDatabaseUtility.model.Book;
@@ -23,56 +26,110 @@ import libraryDatabaseUtility.model.Member;
  *
  */
 public class TestMemberDAOImpl {
-	private final static long MEMBER_ID = 1;
+
 	MemberDAOImpl target;
 	Book book;
 	Member member;
 	DataSource source;
-
+	private static Connection connection = null;
+	private static PreparedStatement statement = null;
+	
+	@BeforeClass
+	public static void beforeClass() {
+		connection = null;
+		statement = null;
+		
+	}
+	
+	@AfterClass
+	public static void afterClass() {
+		
+			try {
+				if(statement != null) {
+					statement.close();
+				}
+				
+				if(connection != null) {
+					connection.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+	}
 	/**
 	 * @throws java.lang.Exception
 	 */
 	@Before
 	public void setUp() throws Exception {
 		target = new MemberDAOImpl();
-		book = new Book();
 		member = new Member();
+		member.setFirstName("Carlos");
+		member.setLastName("Perez");
 		source = DataSource.getInstance();
 		
 	}
+	
+	@After
+	public void tearDown() {
+		try {
+			if(connection != null) {
+				connection.close();
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
 
 	@Test
-	public void testBookAddedToDatabase() throws SQLException {
+	public void testMemberAddedToDatabase() throws SQLException {
 		int result = 1;
 		assertEquals(target.addCustomerToDb(source, member), result);
 		
 	}
 	
 	@Test
-	public void testListOfBooksGetsReturned() throws SQLException {
+	public void testListOfMembersGetsReturned() throws SQLException {
 		List<Member> members = new ArrayList<Member>();
 		members = target.getAllMembers(source);
 		assertNotNull(members);
 	}
 	
 	@Test
-	public void testRecordGetsDeletedFromDatabase() throws SQLException {
-		int result = 1;
-		assertEquals(target.deleteRecord(source, MEMBER_ID), result);
+	public void testRecordGetsDeletedFromDatabase() {
+		try {
+			target.addCustomerToDb(source, member);
+			target.deleteRecord(source, member.getMemberId());
+			List<Member> members = target.searchForMembers(source, member.getLastName());
+			assertNotNull(members);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Test
-	public void testSearchBookReturnsCorrectResult() throws SQLException {
-		Member member1 = new Member(MEMBER_ID, "Mike", "Myers");
-		target.addCustomerToDb(source, member1);
-		assertEquals(target.searchForMembers(source, member1.getLastName()), member1);
+	public void testSearchMemberReturnsCorrectResult() {
+		try {		
+			target.addCustomerToDb(source, member);
+			List<Member> members = target.searchForMembers(source, member.getLastName());
+			Member member1 = members.get(0);
+			assertEquals(member1.getLastName(), member.getLastName());
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	@Test
-	public void testGetBookFromDatabase() {
-		Member member1 = target.getMember(source, MEMBER_ID);
-		assertNotNull(member1);
-		assertTrue(member1 instanceof Member);
+	public void testGetMemberFromDatabase() {
+		try {
+			target.addCustomerToDb(source, member);
+			
+			List<Member> members = target.searchForMembers(source, member.getLastName());
+			Member member1 = members.get(0);
+			assertNotNull(member1);
+			assertTrue(member1 instanceof Member);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}	
 	}
 
 }

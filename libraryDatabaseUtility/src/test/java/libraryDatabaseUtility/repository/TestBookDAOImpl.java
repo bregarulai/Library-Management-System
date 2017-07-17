@@ -65,15 +65,6 @@ public class TestBookDAOImpl {
 		book.setBookTitle("Los Ladrones del Barrio");
 		source = DataSource.getInstance();
 		
-		connection = source.getConnection();
-		
-		try {
-			statement = connection.prepareStatement("insert into books (title, author) values (?, ?)");
-			statement.setString(1, book.getBookTitle());
-			statement.setString(2, book.getBookAuthor());
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
 		
 	}
 	
@@ -124,11 +115,17 @@ public class TestBookDAOImpl {
 	}
 
 	@Test
-	public void testSearchBookReturnsCorrectResult() throws SQLException {
-		target.addBookToDb(source, book);
-		List<Book> books = target.searchForBooks(source, book.getBookTitle());
-		Book book1 = books.get(0);
- 		assertEquals(book1.getBookTitle(), book.getBookTitle());
+	public void testSearchBookReturnsCorrectResult()  {
+			
+		try {
+			List<Book> books;
+			target.addBookToDb(source, book);
+			books = target.searchForBooks(source, book.getBookTitle());
+			Book book1 = books.get(0);
+			assertEquals(book1.getBookTitle(), book.getBookTitle());
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	@Test
