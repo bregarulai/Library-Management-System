@@ -81,16 +81,24 @@ public class TestMemberDAOImpl {
 	}
 
 	@Test
-	public void testMemberAddedToDatabase() throws SQLException {
+	public void testMemberAddedToDatabase() {
 		int result = 1;
-		assertEquals(target.addCustomerToDb(source, member), result);
+		try {
+			assertEquals(target.addCustomerToDb(source, member), result);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		
 	}
 	
 	@Test
-	public void testListOfMembersGetsReturned() throws SQLException {
+	public void testListOfMembersGetsReturned() {
 		List<Member> members = new ArrayList<Member>();
-		members = target.getAllMembers(source);
+		try {
+			members = target.getAllMembers(source);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		assertNotNull(members);
 	}
 	
